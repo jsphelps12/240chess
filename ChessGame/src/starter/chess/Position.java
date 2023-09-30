@@ -9,8 +9,8 @@ public class Position implements ChessPosition{
         this.column = column;
     }
 
-    private int row;
-    private int column;
+    public int row;
+    public int column;
 
 
     @Override

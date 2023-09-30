@@ -3,12 +3,15 @@ package chess;
 import java.util.Objects;
 
 public class Move implements ChessMove{
-    public Move(Position start,Position end, ChessPiece.PieceType type){
+    public Move(ChessPosition start,ChessPosition end, ChessPiece.PieceType type){
         start = start;
         end = end;
+        promotionType = type;
     }
     private Position start;
     private Position end;
+
+    private ChessPiece.PieceType promotionType;
     @Override
     public ChessPosition getStartPosition() {
         return start;
@@ -21,7 +24,7 @@ public class Move implements ChessMove{
 
     @Override
     public ChessPiece.PieceType getPromotionPiece() {
-        return null;
+        return promotionType;
     }
 
     @Override
@@ -34,6 +37,6 @@ public class Move implements ChessMove{
 
     @Override
     public int hashCode() {
-        return Objects.hash(start, end);
+        return Objects.hash(start, end, promotionType);
     }
 }

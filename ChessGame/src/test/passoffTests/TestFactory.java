@@ -17,12 +17,21 @@ public class TestFactory {
 
     public static ChessGame getNewGame(){
         // FIXME
-		return null;
+		return new Game();
     }
 
     public static ChessPiece getNewPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type){
         // FIXME
-		return null;
+        if(type == ChessPiece.PieceType.KING){
+            return new King(pieceColor);
+        }
+        else if(type == ChessPiece.PieceType.PAWN){
+            return new Pawn(pieceColor);
+        }
+        else if(type == ChessPiece.PieceType.ROOK){
+            return new Rook(pieceColor);
+        }
+		return null ;
     }
 
     public static ChessPosition getNewPosition(Integer row, Integer col){
@@ -32,7 +41,7 @@ public class TestFactory {
 
     public static ChessMove getNewMove(ChessPosition startPosition, ChessPosition endPosition, ChessPiece.PieceType promotionPiece){
         // FIXME
-		return null;
+		return new Move(startPosition,endPosition,promotionPiece);
     }
     //------------------------------------------------------------------------------------------------------------------
 

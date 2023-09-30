@@ -3,7 +3,7 @@ package chess;
 public class Board implements ChessBoard{
     public Board(){}
 
-    private ChessPiece[][] theBoard = new ChessPiece[8][8];
+    private ChessPiece[][] theBoard = new ChessPiece[9][9];
     @Override
     public void addPiece(ChessPosition position, ChessPiece piece) {
         theBoard[position.getRow()][position.getColumn()] = piece;
