@@ -19,6 +19,11 @@ public class Position implements ChessPosition{
     }
 
     @Override
+    public int getColumn() {
+        return column;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -31,8 +36,4 @@ public class Position implements ChessPosition{
         return Objects.hash(row, column);
     }
 
-    @Override
-    public int getColumn() {
-        return column;
-    }
 }

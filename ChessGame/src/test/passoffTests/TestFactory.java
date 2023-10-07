@@ -31,6 +31,15 @@ public class TestFactory {
         else if(type == ChessPiece.PieceType.ROOK){
             return new Rook(pieceColor);
         }
+        else if(type == ChessPiece.PieceType.KNIGHT){
+            return new Knight(pieceColor);
+        }
+        else if(type == ChessPiece.PieceType.BISHOP){
+            return new Bishop(pieceColor);
+        }
+        else if(type == ChessPiece.PieceType.QUEEN){
+            return new Queen(pieceColor);
+        }
 		return null ;
     }
 
