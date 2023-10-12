@@ -47,7 +47,7 @@ public class Game implements ChessGame{
 
     @Override
     public void makeMove(ChessMove move) throws InvalidMoveException {
-        //see if startposition is null or not
+        //see if start position is null or not
         if(gameBoard.getPiece(move.getStartPosition()) == null){
             throw new InvalidMoveException("No Piece Here");
         }
