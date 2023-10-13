@@ -1,3 +1,5 @@
+package Requests;
+
 /**
  * login request class
  */

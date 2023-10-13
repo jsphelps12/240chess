@@ -1,4 +1,6 @@
-import chess.ChessGame;
+package Requests;
+
+import Model.Auth;
 
 /**
  * Create Request class

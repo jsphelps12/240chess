@@ -1,5 +1,7 @@
+package Model;
+
 /**
- * Auth Class
+ * Model.Auth Class
  */
 public class Auth {
     /**

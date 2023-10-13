@@ -1,3 +1,8 @@
+package Services;
+
+import Requests.JoinRequest;
+import Responses.JoinResponse;
+
 /**
  * Join service
  * if a game exists, and a color a specified, the caller is added to the game, if no color, then added as spectator

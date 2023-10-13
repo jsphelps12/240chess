@@ -1,3 +1,6 @@
+package DAO;
+
+import Model.Auth;
 import dataAccess.DataAccessException;
 
 import java.util.HashMap;
@@ -14,7 +17,7 @@ public class AuthDAO {
     /**
      * hashmap of tokens
      */
-    private HashMap<String,Auth> theAuths;
+    private HashMap<String, Auth> theAuths;
 
     /**
      * Creates an auth

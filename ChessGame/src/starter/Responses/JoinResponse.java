@@ -1,12 +1,14 @@
+package Responses;
+
 /**
- * logout response class
+ * join response class
  */
-public class LogoutResponse {
+public class JoinResponse {
     /**
      * constructor
      * @param m message
      */
-    public LogoutResponse(String m){
+    public JoinResponse(String m){
         message = m;
     }
 

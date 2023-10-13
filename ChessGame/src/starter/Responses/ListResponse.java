@@ -1,15 +1,19 @@
+package Responses;
+
+import Model.GameModel;
+
+import java.util.List;
+
 /**
- * create response class
+ * list response class
  */
-public class CreateResponse {
+public class ListResponse {
     /**
      * constructor
      * @param m message
-     * @param i gameID
      */
-    public CreateResponse(String m,int i){
+    public ListResponse(String m){
         message = m;
-        gameID = i;
     }
 
     /**
@@ -17,9 +21,9 @@ public class CreateResponse {
      */
     private String message;
     /**
-     * gameID
+     * the games
      */
-    private int gameID;
+    private List<GameModel> games;
 
     /**
      * get message
@@ -30,10 +34,10 @@ public class CreateResponse {
     }
 
     /**
-     * get GameID
-     * @return gameID
+     * get games
+     * @return games
      */
-    public int getGameID(){
-        return gameID;
+    public List<GameModel> getGames(){
+        return games;
     }
 }

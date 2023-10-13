@@ -1,12 +1,14 @@
+package Responses;
+
 /**
- * clear response class
+ * logout response class
  */
-public class ClearResponse {
+public class LogoutResponse {
     /**
      * constructor
      * @param m message
      */
-    public ClearResponse(String m){
+    public LogoutResponse(String m){
         message = m;
     }
 

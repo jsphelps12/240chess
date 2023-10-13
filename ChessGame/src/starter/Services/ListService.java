@@ -1,3 +1,8 @@
+package Services;
+
+import Model.Auth;
+import Responses.ListResponse;
+
 /**
  * list service
  * gives a list of all the games

@@ -1,3 +1,6 @@
+package DAO;
+
+import Model.User;
 import dataAccess.DataAccessException;
 
 import java.util.HashMap;
@@ -14,7 +17,7 @@ public class UserDAO {
     /**
      * hashmap of users, indexed by usernames
      */
-    private HashMap<String,User> theUsers;
+    private HashMap<String, User> theUsers;
 
     /**
      * Creates user
@@ -25,7 +28,7 @@ public class UserDAO {
     }
 
     /**
-     * Queries an User
+     * Queries an Model.User
      * @param u is the username we are looking up
      * @return corresponding user
      * @throws DataAccessException

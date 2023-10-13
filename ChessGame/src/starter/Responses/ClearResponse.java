@@ -1,12 +1,14 @@
+package Responses;
+
 /**
- * join response class
+ * clear response class
  */
-public class JoinResponse {
+public class ClearResponse {
     /**
      * constructor
      * @param m message
      */
-    public JoinResponse(String m){
+    public ClearResponse(String m){
         message = m;
     }
 

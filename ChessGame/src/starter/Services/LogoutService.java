@@ -1,3 +1,8 @@
+package Services;
+
+import Model.Auth;
+import Responses.LogoutResponse;
+
 /**
  *Logout Service
  * logs an user out

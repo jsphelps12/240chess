@@ -1,7 +1,9 @@
+package Model;
+
 import chess.ChessGame;
 
 /**
- * GameModel class
+ * Model.GameModel class
  */
 public class GameModel {
     /**

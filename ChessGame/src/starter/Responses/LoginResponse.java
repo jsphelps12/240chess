@@ -1,3 +1,5 @@
+package Responses;
+
 /**
  * login response class
  */

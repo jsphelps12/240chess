@@ -1,3 +1,8 @@
+package Services;
+
+import Requests.RegisterRequest;
+import Responses.RegisterResponse;
+
 /**
  * Register Service Class
  * registers a new user

@@ -1,16 +1,17 @@
-import java.util.HashSet;import java.util.HashMap;
-import java.util.List;
+package Responses;
 
 /**
- * list response class
+ * create response class
  */
-public class ListResponse {
+public class CreateResponse {
     /**
      * constructor
      * @param m message
+     * @param i gameID
      */
-    public ListResponse(String m){
+    public CreateResponse(String m,int i){
         message = m;
+        gameID = i;
     }
 
     /**
@@ -18,9 +19,9 @@ public class ListResponse {
      */
     private String message;
     /**
-     * the games
+     * gameID
      */
-    private List<GameModel> games;
+    private int gameID;
 
     /**
      * get message
@@ -31,10 +32,10 @@ public class ListResponse {
     }
 
     /**
-     * get games
-     * @return games
+     * get GameID
+     * @return gameID
      */
-    public List<GameModel> getGames(){
-        return games;
+    public int getGameID(){
+        return gameID;
     }
 }

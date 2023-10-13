@@ -1,3 +1,6 @@
+package Requests;
+
+import Model.Auth;
 import chess.ChessGame;
 
 /**

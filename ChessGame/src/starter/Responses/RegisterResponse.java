@@ -1,3 +1,5 @@
+package Responses;
+
 /**
  * Register response class
  */

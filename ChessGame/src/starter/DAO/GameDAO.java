@@ -1,3 +1,6 @@
+package DAO;
+
+import Model.GameModel;
 import chess.ChessGame;
 import chess.Game;
 import dataAccess.DataAccessException;
@@ -16,7 +19,7 @@ public class GameDAO {
     /**
      * hashmap of game models
      */
-    private HashMap<Integer,GameModel> games;
+    private HashMap<Integer, GameModel> games;
 
     /**
      * Creates
@@ -30,7 +33,7 @@ public class GameDAO {
     /**
      * Queries a game
      * @param i is the index we are looking up
-     * @return a GameModel
+     * @return a Model.GameModel
      * @throws DataAccessException
      */
     public GameModel readGame(Integer i) throws DataAccessException{
@@ -67,7 +70,7 @@ public class GameDAO {
      * return the hashmap for list service
      * @return games
      */
-    public HashMap<Integer,GameModel> getGames(){
+    public HashMap<Integer, GameModel> getGames(){
         return games;
     }
 

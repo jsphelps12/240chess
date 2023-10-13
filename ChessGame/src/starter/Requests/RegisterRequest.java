@@ -1,3 +1,5 @@
+package Requests;
+
 /**
  * Register Request class
  */

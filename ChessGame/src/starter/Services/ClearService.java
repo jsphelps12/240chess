@@ -1,3 +1,7 @@
+package Services;
+
+import Responses.ClearResponse;
+
 /**
  * clear service
  * clears all the databases
