@@ -22,7 +22,7 @@ public class ClearService {
             aDAO.clearAll();
             GameDAO gDAO = new GameDAO();
             gDAO.clearAll();
-            return new ClearResponse("");
+            return new ClearResponse(null);
         }
         catch(DataAccessException e){
             return new ClearResponse("Error: bad access");
