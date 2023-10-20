@@ -9,9 +9,12 @@ public class CreateResponse {
      * @param m message
      * @param i gameID
      */
-    public CreateResponse(String m,int i){
+    public CreateResponse(String m, Integer i){
         message = m;
         gameID = i;
+    }
+    public CreateResponse(String m){
+        message = m;
     }
 
     /**
@@ -21,7 +24,7 @@ public class CreateResponse {
     /**
      * gameID
      */
-    private int gameID;
+    private Integer gameID;
 
     /**
      * get message
@@ -35,7 +38,7 @@ public class CreateResponse {
      * get GameID
      * @return gameID
      */
-    public int getGameID(){
+    public Integer getGameID(){
         return gameID;
     }
 }

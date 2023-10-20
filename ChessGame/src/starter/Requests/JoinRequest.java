@@ -1,6 +1,5 @@
 package Requests;
 
-import Model.Auth;
 import chess.ChessGame;
 
 /**
@@ -13,31 +12,35 @@ public class JoinRequest {
      * @param c color
      * @param au auth token
      */
-    public JoinRequest(int i, ChessGame.TeamColor c,Auth au){
-        ID = i;
-        color = c;
-        auth = au;
+    public JoinRequest(Integer i, ChessGame.TeamColor c,String au){
+        gameID = i;
+        playerColor = c;
+        authorization = au;
     }
 
     /**
      * auth token
      */
-    private Auth auth;
+    private String authorization;
     /**
      * ID
      */
-    private int ID;
+    private Integer gameID;
     /**
      * color
      */
-    private ChessGame.TeamColor color;
+    private ChessGame.TeamColor playerColor;
 
     /**
      * get ID
      * @return ID
      */
-    public int getID(){
-        return ID;
+    public Integer getGameID(){
+        return gameID;
+    }
+
+    public void setAuthorization(String au){
+        authorization = au;
     }
 
     /**
@@ -45,14 +48,14 @@ public class JoinRequest {
      * @return color
      */
     public ChessGame.TeamColor getColor(){
-        return color;
+        return playerColor;
     }
 
     /**
      * get auth token
      * @return auth
      */
-    public Auth getAuth(){
-        return auth;
+    public String getAuthorization(){
+        return authorization;
     }
 }

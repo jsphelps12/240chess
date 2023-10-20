@@ -14,10 +14,15 @@ public class GameModel {
      * @param game game Name
      * @param g the actual game
      */
-    public GameModel(int i, String white, String black, String game, ChessGame g){
+    public GameModel(Integer i, String white, String black, String game, ChessGame g){
         gameID = i;
         whiteUsername = white;
         blackUsername = black;
+        gameName = game;
+        this.game = g;
+    }
+    public GameModel(Integer i, String game, ChessGame g){
+        gameID = i;
         gameName = game;
         this.game = g;
     }
@@ -25,7 +30,7 @@ public class GameModel {
     /**
      * Game ID
      */
-    private int gameID;
+    private Integer gameID;
     /**
      * white username
      */
@@ -43,11 +48,19 @@ public class GameModel {
      */
     private ChessGame game;
 
+    public void setBlackUsername(String blackUsername) {
+        this.blackUsername = blackUsername;
+    }
+
+    public void setWhiteUsername(String whiteUsername) {
+        this.whiteUsername = whiteUsername;
+    }
+
     /**
      * returns Game ID
      * @return game ID
      */
-    public int getGameID(){
+    public Integer getGameID(){
         return gameID;
     }
 

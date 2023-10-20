@@ -12,7 +12,8 @@ public class ListResponse {
      * constructor
      * @param m message
      */
-    public ListResponse(String m){
+    public ListResponse(String m,List<GameModel> g){
+        games = g;
         message = m;
     }
 
@@ -31,6 +32,10 @@ public class ListResponse {
      */
     public String getMessage(){
         return message;
+    }
+
+    public void setGames(List<GameModel> g){
+        this.games = g;
     }
 
     /**

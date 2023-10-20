@@ -1,7 +1,7 @@
+package Server;
+
 import Handlers.*;
-import com.google.gson.Gson;
 import spark.*;
-import java.util.*;
 
 public class Server {
 
@@ -19,7 +19,8 @@ public class Server {
         Spark.delete("/db",new ClearHandler());
         Spark.delete("/session",new LogoutHandler());
         Spark.post("/game", new CreateHandler());
-
+        Spark.put("/game", new JoinHandler());
+        Spark.get("/game", new ListHandler());
 
     }
 }

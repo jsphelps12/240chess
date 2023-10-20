@@ -11,7 +11,7 @@ public class CreateRequest {
      * @param g game name
      * @param au auth token
      */
-    public CreateRequest(String g, Auth au){
+    public CreateRequest(String g, String au){
         gameName = g;
         authorization = au;
     }
@@ -19,7 +19,7 @@ public class CreateRequest {
     /**
      * the token
      */
-    private Auth authorization;
+    private String authorization;
     /**
      * the game name
      */
@@ -29,8 +29,12 @@ public class CreateRequest {
      * get token
      * @return auth
      */
-    public Auth getAuth() {
+    public String getAuth() {
         return authorization;
+    }
+
+    public void SetAuth(String au){
+        authorization = au;
     }
 
     /**

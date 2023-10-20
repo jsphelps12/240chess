@@ -27,7 +27,7 @@ public class GameDAO {
      * @throws DataAccessException
      */
     public void createGame(GameModel g) throws DataAccessException {
-
+        games.put(g.getGameID(),g);
     }
 
     /**
@@ -37,7 +37,10 @@ public class GameDAO {
      * @throws DataAccessException
      */
     public GameModel readGame(Integer i) throws DataAccessException{
-        return new GameModel(1, "", "", "", new Game());
+        if(games.containsKey(i)){
+            return games.get(i);
+        }
+        return null;
     }
 
     /**
@@ -47,6 +50,16 @@ public class GameDAO {
      */
     public void updateGame(Integer i) throws DataAccessException{
 
+    }
+
+    public void updateWhiteUserName(Integer i, String user) throws DataAccessException {
+        GameModel g = readGame(i);
+        g.setWhiteUsername(user);
+    }
+
+    public void updateBlackUserName(Integer i, String user) throws DataAccessException {
+        GameModel g = readGame(i);
+        g.setBlackUsername(user);
     }
 
     /**

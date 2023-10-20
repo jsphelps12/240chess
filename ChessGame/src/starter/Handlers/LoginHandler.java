@@ -26,7 +26,6 @@ public class LoginHandler implements Route {
         else{
             response.status(500);
         }
-// play with this. Might have to return response.body()
         return response.body();
     }
 }
