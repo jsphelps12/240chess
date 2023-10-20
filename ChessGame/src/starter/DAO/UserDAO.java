@@ -17,7 +17,7 @@ public class UserDAO {
     /**
      * hashmap of users, indexed by usernames
      */
-    private HashMap<String, User> theUsers;
+    private static HashMap<String, User> theUsers = new HashMap<>();
 
     /**
      * Creates user
@@ -25,6 +25,7 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public void createUser(User u) throws DataAccessException{
+        theUsers.put(u.getUserName(),u);
     }
 
     /**
@@ -34,7 +35,10 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public User readUser(String u) throws DataAccessException{
-        return new User("","","");
+        if(theUsers.containsKey(u)){
+            return theUsers.get(u);
+        }
+        return null;
     }
 
     /**
@@ -60,6 +64,7 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public void clearAll() throws DataAccessException{
+        theUsers.clear();
 
     }
 }

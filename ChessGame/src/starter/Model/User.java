@@ -12,8 +12,8 @@ public class User {
      */
     public User(String em, String u, String pass){
         email = em;
-        userName = u;
-        passWord = pass;
+        username = u;
+        password = pass;
     }
 
     /**
@@ -23,18 +23,18 @@ public class User {
     /**
      * username
      */
-    private String userName;
+    private String username;
     /**
      * password
      */
-    private String passWord;
+    private String password;
 
     /**
      * Gets username
      * @return username
      */
     public String getUserName(){
-        return userName;
+        return username;
     }
 
     /**
@@ -49,8 +49,8 @@ public class User {
      * gets password
      * @return password
      */
-    public String getPassWord(){
-        return passWord;
+    public String getPassword(){
+        return password;
     }
 
 }

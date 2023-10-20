@@ -17,7 +17,7 @@ public class AuthDAO {
     /**
      * hashmap of tokens
      */
-    private HashMap<String, Auth> theAuths;
+    private static HashMap<String, Auth> theAuths = new HashMap<>();
 
     /**
      * Creates an auth
@@ -25,35 +25,38 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public void createAuth(Auth a) throws DataAccessException {
-
+        theAuths.put(a.getAuthToken(),a);
     }
 
     /**
      * Queries an auth
-     * @param u is the username we are looking up
+     * @param a is the username we are looking up
      * @return the auth token
      * @throws DataAccessException
      */
-    public Auth readAuth(String u) throws DataAccessException{
-        return new Auth("","");
+    public Auth readAuth(String a) throws DataAccessException{
+        if(theAuths.containsKey(a)){
+            return theAuths.get(a);
+        }
+        return null;
     }
 
     /**
      * Updates an auth
-     * @param u is the username we are looking up
+     * @param a is the username we are looking up
      * @throws DataAccessException
      */
-    public void updateAuth(String u) throws DataAccessException{
+    public void updateAuth(String a) throws DataAccessException{
 
     }
 
     /**
      * Deletes an auth
-     * @param u is the username we are looking up
+     * @param a is the username we are looking up
      * @throws DataAccessException
      */
-    public void deleteAuth(String u) throws DataAccessException{
-
+    public void deleteAuth(String a) throws DataAccessException{
+        theAuths.remove(a);
     }
 
     /**
@@ -61,7 +64,7 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public void clearAll() throws DataAccessException{
-
+        theAuths.clear();
     }
 
 

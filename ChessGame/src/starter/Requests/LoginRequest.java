@@ -10,33 +10,33 @@ public class LoginRequest {
      * @param p password
      */
     public LoginRequest(String u, String p){
-        userName = u;
-        passWord = p;
+        username = u;
+        password = p;
     }
 
     /**
      * username
      */
-    private String userName;
+    private String username;
     /**
      * password
      */
-    private String passWord;
+    private String password;
 
     /**
      * get username
      * @return username
      */
-    public String getUserName(){
-        return userName;
+    public String getUsername(){
+        return username;
     }
 
     /**
      * get password
      * @return password
      */
-    public String getPassWord(){
-        return passWord;
+    public String getPassword(){
+        return password;
     }
 
 }

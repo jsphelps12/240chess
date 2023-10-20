@@ -1,17 +1,18 @@
 package Model;
 
+import java.util.UUID;
+
 /**
  * Model.Auth Class
  */
 public class Auth {
     /**
      * Constructor
-     * @param au auToken string
      * @param u username
      */
-    public Auth(String au, String u){
-        authToken = au;
-        userName = u;
+    public Auth(String u){
+        authToken = UUID.randomUUID().toString();
+        username = u;
     }
 
     /**
@@ -21,7 +22,7 @@ public class Auth {
     /**
      * username
      */
-    private String userName;
+    private String username;
 
     /**
      * Get authtoken
@@ -35,7 +36,7 @@ public class Auth {
      * Get username
      * @return the username
      */
-    public String getUserName(){
-        return userName;
+    public String getUsername(){
+        return username;
     }
 }

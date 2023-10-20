@@ -1,6 +1,9 @@
 package Services;
 
+import DAO.*;
 import Responses.ClearResponse;
+import Responses.RegisterResponse;
+import dataAccess.DataAccessException;
 
 /**
  * clear service
@@ -12,6 +15,17 @@ public class ClearService {
      * @return clear response
      */
     public ClearResponse clear(){
-        return new ClearResponse("");
+        try {
+            UserDAO uDAO = new UserDAO();
+            uDAO.clearAll();
+            AuthDAO aDAO = new AuthDAO();
+            aDAO.clearAll();
+            GameDAO gDAO = new GameDAO();
+            gDAO.clearAll();
+            return new ClearResponse("");
+        }
+        catch(DataAccessException e){
+            return new ClearResponse("Error: bad access");
+        }
     }
 }

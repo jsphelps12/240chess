@@ -13,13 +13,13 @@ public class CreateRequest {
      */
     public CreateRequest(String g, Auth au){
         gameName = g;
-        auth = au;
+        authorization = au;
     }
 
     /**
      * the token
      */
-    private Auth auth;
+    private Auth authorization;
     /**
      * the game name
      */
@@ -30,7 +30,7 @@ public class CreateRequest {
      * @return auth
      */
     public Auth getAuth() {
-        return auth;
+        return authorization;
     }
 
     /**

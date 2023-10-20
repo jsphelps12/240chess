@@ -16,10 +16,10 @@ public class GameModel {
      */
     public GameModel(int i, String white, String black, String game, ChessGame g){
         gameID = i;
-        whiteUserName = white;
-        blackUserName = black;
+        whiteUsername = white;
+        blackUsername = black;
         gameName = game;
-        theGame = g;
+        this.game = g;
     }
 
     /**
@@ -29,11 +29,11 @@ public class GameModel {
     /**
      * white username
      */
-    private String whiteUserName;
+    private String whiteUsername;
     /**
      * black username
      */
-    private String blackUserName;
+    private String blackUsername;
     /**
      * gamename
      */
@@ -41,7 +41,7 @@ public class GameModel {
     /**
      * the game object
      */
-    private ChessGame theGame;
+    private ChessGame game;
 
     /**
      * returns Game ID
@@ -55,16 +55,16 @@ public class GameModel {
      * returns white username
      * @return white username
      */
-    public String getWhiteUserName(){
-        return whiteUserName;
+    public String getWhiteUsername(){
+        return whiteUsername;
     }
 
     /**
      * returns black username
      * @return black username
      */
-    public String getBlackUserName(){
-        return blackUserName;
+    public String getBlackUsername(){
+        return blackUsername;
     }
 
     /**
@@ -79,8 +79,8 @@ public class GameModel {
      * gets the game
      * @return the game
      */
-    public ChessGame getTheGame(){
-        return theGame;
+    public ChessGame getGame(){
+        return game;
     }
 
 }

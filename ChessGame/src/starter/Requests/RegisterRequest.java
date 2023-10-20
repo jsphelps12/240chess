@@ -11,19 +11,19 @@ public class RegisterRequest {
      * @param e email
      */
     public RegisterRequest(String u, String p,String e){
-        userName = u;
-        passWord = p;
+        username = u;
+        password = p;
         email = e;
     }
 
     /**
      * username
      */
-    private String userName;
+    private String username;
     /**
      * password
      */
-    private String passWord;
+    private String password;
 
     /**
      * email
@@ -34,16 +34,16 @@ public class RegisterRequest {
      * get username
      * @return username
      */
-    public String getUserName(){
-        return userName;
+    public String getUsername(){
+        return username;
     }
 
     /**
      * get password
      * @return password
      */
-    public String getPassWord(){
-        return passWord;
+    public String getPassword(){
+        return password;
     }
 
     /**

@@ -1,7 +1,9 @@
 package Services;
 
+import DAO.AuthDAO;
 import Model.Auth;
 import Responses.LogoutResponse;
+import dataAccess.DataAccessException;
 
 /**
  *Logout Service
@@ -13,7 +15,20 @@ public class LogoutService {
      * @param au authorization token
      * @return logout resopnse
      */
-    public LogoutResponse logout(Auth au){
-        return new LogoutResponse("");
+    public LogoutResponse logout(String au){
+        try {
+            AuthDAO aDAO = new AuthDAO();
+            if(aDAO.readAuth(au) == null){
+                return new LogoutResponse("Error: unauthorized");
+            }
+            else {
+                aDAO.deleteAuth(au);
+            }
+            return new LogoutResponse(null);
+        }
+        catch(DataAccessException e){
+            return new LogoutResponse("Error: bad access");
+        }
+
     }
 }

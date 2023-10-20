@@ -13,7 +13,7 @@ public class LoginResponse {
     public LoginResponse(String m,String a,String u){
         message = m;
         authToken = a;
-        userName = u;
+        username = u;
     }
 
     /**
@@ -27,14 +27,14 @@ public class LoginResponse {
     /**
      * userName
      */
-    private String userName;
+    private String username;
 
     /**
      * get username
      * @return username
      */
-    public String getUserName(){
-        return userName;
+    public String getUsername(){
+        return username;
     }
 
     /**

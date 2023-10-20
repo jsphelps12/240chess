@@ -19,7 +19,7 @@ public class GameDAO {
     /**
      * hashmap of game models
      */
-    private HashMap<Integer, GameModel> games;
+    private static HashMap<Integer, GameModel> games = new HashMap<>();
 
     /**
      * Creates
@@ -63,7 +63,7 @@ public class GameDAO {
      * @throws DataAccessException
      */
     public void clearAll() throws DataAccessException{
-
+        games.clear();
     }
 
     /**
@@ -73,5 +73,4 @@ public class GameDAO {
     public HashMap<Integer, GameModel> getGames(){
         return games;
     }
-
 }
