@@ -11,6 +11,7 @@ public class ListResponse {
     /**
      * constructor
      * @param m message
+     * @param g games
      */
     public ListResponse(String m,List<GameModel> g){
         games = g;
