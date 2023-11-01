@@ -2,7 +2,10 @@ package DAO;
 
 import Model.User;
 import dataAccess.DataAccessException;
+import dataAccess.Database;
 
+import javax.xml.crypto.Data;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -19,13 +22,26 @@ public class UserDAO {
      */
     private static HashMap<String, User> theUsers = new HashMap<>();
 
+    private Database db = new Database();
+
     /**
      * Creates user
      * @param u is user we are creating
      * @throws DataAccessException
      */
     public void createUser(User u) throws DataAccessException{
-        theUsers.put(u.getUserName(),u);
+        var conn = db.getConnection();
+        try (var preparedStatement = conn.prepareStatement("INSERT INTO user (username,password,email) VALUES (?,?,?)")) {
+            preparedStatement.setString(1,u.getUserName());
+            preparedStatement.setString(2,u.getPassword());
+            preparedStatement.setString(3,u.getEmail());
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.toString());
+        } finally {
+            db.returnConnection(conn);
+        }
+        //theUsers.put(u.getUserName(),u);
     }
 
     /**
@@ -35,10 +51,29 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public User readUser(String u) throws DataAccessException{
-        if(theUsers.containsKey(u)){
-            return theUsers.get(u);
+//        if(theUsers.containsKey(u)){
+//            return theUsers.get(u);
+//        }
+//        return null;
+        var conn = db.getConnection();
+        try (var preparedStatement = conn.prepareStatement("SELECT username,password,email FROM user WHERE username = ?")) {
+            preparedStatement.setString(1,u);
+            try (var rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    String username = rs.getString("username");
+                    String password = rs.getString("password");
+                    String email = rs.getString("email");
+                    return new User(email,username,password);
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.toString());
+        } finally {
+            db.returnConnection(conn);
         }
-        return null;
+
+
     }
 
     /**
@@ -64,7 +99,14 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public void clearAll() throws DataAccessException{
-        theUsers.clear();
+        var conn = db.getConnection();
+     try (var preparedStatement = conn.prepareStatement("TRUNCATE TABLE user")) {
+         preparedStatement.execute();
+     } catch (SQLException ex) {
+         throw new DataAccessException(ex.toString());
+     } finally {
+         db.returnConnection(conn);
+     }
 
     }
 }
