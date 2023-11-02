@@ -15,6 +15,13 @@ public class Knight extends Piece{
         return color;
     }
 
+    public void setColorAsBlack(){
+        this.color = ChessGame.TeamColor.BLACK;
+    }
+    public void setColorAsWhite(){
+        this.color = ChessGame.TeamColor.WHITE;
+    }
+
     @Override
     public PieceType getPieceType() {
         return type;

@@ -9,9 +9,171 @@ public class Game implements ChessGame{
         this.color = TeamColor.WHITE;
     }
 
+    public Game(String s){
+        if(s.charAt(0) == 'W'){
+            this.color = TeamColor.WHITE;
+        }
+        else{
+            this.color = TeamColor.BLACK;
+        }
+        s = s.substring(1);
+        while(s.length() >4){
+            String tile = s.substring(0,4);
+            s = s.substring(4);
+            char ic = tile.charAt(0);
+            int i = Character.getNumericValue(ic);
+            char jc = tile.charAt(1);
+            int j = Character.getNumericValue(jc);
+            char colo = tile.charAt(2);
+            char pt = tile.charAt(3);
+            Position addPos = new Position(i,j);
+            if(pt == 'P'){
+                Pawn pawn = new Pawn(TeamColor.WHITE);
+                if(colo == 'B'){
+                    pawn.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,pawn);
+            }
+            else if(pt == 'R'){
+                Rook rook = new Rook(TeamColor.WHITE);
+                if(colo == 'B'){
+                    rook.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,rook);
+            }
+            else if(pt == 'N'){
+                Knight knight = new Knight(TeamColor.WHITE);
+                if(colo == 'B'){
+                    knight.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,knight);
+            }
+            else if(pt == 'B'){
+                Bishop bishop = new Bishop(TeamColor.WHITE);
+                if(colo == 'B'){
+                    bishop.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,bishop);
+            }
+            else if(pt == 'Q'){
+                Queen queen = new Queen(TeamColor.WHITE);
+                if(colo == 'B'){
+                    queen.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,queen);
+            }
+            else if(pt == 'K'){
+                King king = new King(TeamColor.WHITE);
+                if(colo == 'B'){
+                    king.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,king);
+            }
+        }
+        if(s.length() == 4){
+
+            char ic = s.charAt(0);
+            int i = Character.getNumericValue(ic);
+            char jc = s.charAt(1);
+            int j = Character.getNumericValue(jc);
+            char colo = s.charAt(2);
+            char pt = s.charAt(3);
+            Position addPos = new Position(i,j);
+            if(pt == 'P'){
+                Pawn pawn = new Pawn(TeamColor.WHITE);
+                if(colo == 'B'){
+                    pawn.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,pawn);
+            }
+            else if(pt == 'R'){
+                Rook rook = new Rook(TeamColor.WHITE);
+                if(colo == 'B'){
+                    rook.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,rook);
+            }
+            else if(pt == 'N'){
+                Knight knight = new Knight(TeamColor.WHITE);
+                if(colo == 'B'){
+                    knight.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,knight);
+            }
+            else if(pt == 'B'){
+                Bishop bishop = new Bishop(TeamColor.WHITE);
+                if(colo == 'B'){
+                    bishop.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,bishop);
+            }
+            else if(pt == 'Q'){
+                Queen queen = new Queen(TeamColor.WHITE);
+                if(colo == 'B'){
+                    queen.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,queen);
+            }
+            else if(pt == 'K'){
+                King king = new King(TeamColor.WHITE);
+                if(colo == 'B'){
+                    king.setColorAsBlack();
+                }
+                this.gameBoard.addPiece(addPos,king);
+            }
+        }
+    }
+
     private ChessGame.TeamColor color ;
 
     private ChessBoard gameBoard = new Board();
+
+    public String toString(){
+        StringBuilder output = new StringBuilder();
+        if(color == TeamColor.WHITE){
+            output.append('W');
+        }
+        else{
+            output.append('B');
+        }
+        for(int i = 0;i < 9;i++){
+            for(int j = 0;j<9;j++){
+                Position checkPos = new Position(i,j);
+                if(gameBoard.getPiece(checkPos) != null){
+                    output.append(i);
+                    output.append(j);
+                    if(gameBoard.getPiece(checkPos).getTeamColor() == TeamColor.WHITE){
+                        output.append('W');
+                    }
+                    else {
+                        output.append('B');
+                    }
+                    if(gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.PAWN){
+                        output.append('P');
+                    }
+                    else if(gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.ROOK){
+                        output.append('R');
+                    }
+                    else if(gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KNIGHT){
+                        output.append('N');
+                    }
+                    else if(gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.BISHOP){
+                        output.append('B');
+                    }
+                    else if(gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.BISHOP){
+                        output.append('B');
+                    }
+                    else if(gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.QUEEN){
+                        output.append('Q');
+                    }
+                    else if(gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KING){
+                        output.append('K');
+                    }
+                }
+            }
+        }
+        return output.toString();
+    }
 
 
     @Override
