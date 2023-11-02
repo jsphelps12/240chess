@@ -100,13 +100,12 @@ public class UserDAO {
      */
     public void clearAll() throws DataAccessException{
         var conn = db.getConnection();
-     try (var preparedStatement = conn.prepareStatement("TRUNCATE TABLE user")) {
-         preparedStatement.execute();
-     } catch (SQLException ex) {
-         throw new DataAccessException(ex.toString());
-     } finally {
-         db.returnConnection(conn);
-     }
-
+        try (var preparedStatement = conn.prepareStatement("TRUNCATE TABLE user")) {
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.toString());
+        } finally {
+           db.returnConnection(conn);
+         }
     }
 }

@@ -32,6 +32,10 @@ public class Auth {
         return authToken;
     }
 
+    public void setAuthToken(String a){
+        authToken = a;
+    }
+
     /**
      * Get username
      * @return the username

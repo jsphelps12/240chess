@@ -1,8 +1,11 @@
 package DAO;
 
 import Model.Auth;
+import Model.User;
 import dataAccess.DataAccessException;
+import dataAccess.Database;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -17,7 +20,10 @@ public class AuthDAO {
     /**
      * hashmap of tokens
      */
-    private static HashMap<String, Auth> theAuths = new HashMap<>();
+    //private static HashMap<String, Auth> theAuths = new HashMap<>();
+
+    private Database db = new Database();
+
 
     /**
      * Creates an auth
@@ -25,7 +31,18 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public void createAuth(Auth a) throws DataAccessException {
-        theAuths.put(a.getAuthToken(),a);
+        var conn = db.getConnection();
+        try (var preparedStatement = conn.prepareStatement("INSERT INTO auth (authToken,username) VALUES (?,?)")) {
+            preparedStatement.setString(1,a.getAuthToken());
+            preparedStatement.setString(2,a.getUsername());
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.toString());
+        } finally {
+            db.returnConnection(conn);
+        }
+
+        //theAuths.put(a.getAuthToken(),a);
     }
 
     /**
@@ -35,10 +52,28 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public Auth readAuth(String a) throws DataAccessException{
-        if(theAuths.containsKey(a)){
-            return theAuths.get(a);
+//        if(theAuths.containsKey(a)){
+//            return theAuths.get(a);
+//        }
+//        return null;
+        var conn = db.getConnection();
+        try (var preparedStatement = conn.prepareStatement("SELECT authToken,username FROM auth WHERE authToken = ?")) {
+            preparedStatement.setString(1,a);
+            try (var rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    String authToken = rs.getString("authToken");
+                    String username = rs.getString("username");
+                    Auth auth = new Auth(username);
+                    auth.setAuthToken(authToken);
+                    return auth;
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.toString());
+        } finally {
+            db.returnConnection(conn);
         }
-        return null;
     }
 
     /**
@@ -56,7 +91,17 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public void deleteAuth(String a) throws DataAccessException{
-        theAuths.remove(a);
+        var conn = db.getConnection();
+        try (var preparedStatement = conn.prepareStatement("DELETE FROM auth WHERE authToken = ?")) {
+            preparedStatement.setString(1,a);
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.toString());
+        } finally {
+            db.returnConnection(conn);
+        }
+
+        //theAuths.remove(a);
     }
 
     /**
@@ -64,7 +109,15 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public void clearAll() throws DataAccessException{
-        theAuths.clear();
+        var conn = db.getConnection();
+        try (var preparedStatement = conn.prepareStatement("TRUNCATE TABLE auth")) {
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            throw new DataAccessException(ex.toString());
+        } finally {
+            db.returnConnection(conn);
+        }
+        //theAuths.clear();
     }
 
 
