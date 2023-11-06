@@ -30,6 +30,7 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public void createUser(User u) throws DataAccessException{
+        boolean commit = true;
         var conn = db.getConnection();
         try (var preparedStatement = conn.prepareStatement("INSERT INTO user (username,password,email) VALUES (?,?,?)")) {
             preparedStatement.setString(1,u.getUserName());
@@ -37,9 +38,10 @@ public class UserDAO {
             preparedStatement.setString(3,u.getEmail());
             preparedStatement.execute();
         } catch (SQLException ex) {
+            commit = false;
             throw new DataAccessException(ex.toString());
         } finally {
-            db.returnConnection(conn);
+            db.closeConnection(commit);
         }
         //theUsers.put(u.getUserName(),u);
     }
@@ -55,6 +57,7 @@ public class UserDAO {
 //            return theUsers.get(u);
 //        }
 //        return null;
+        boolean commit = true;
         var conn = db.getConnection();
         try (var preparedStatement = conn.prepareStatement("SELECT username,password,email FROM user WHERE username = ?")) {
             preparedStatement.setString(1,u);
@@ -68,9 +71,10 @@ public class UserDAO {
                 return null;
             }
         } catch (SQLException ex) {
+            commit = false;
             throw new DataAccessException(ex.toString());
         } finally {
-            db.returnConnection(conn);
+            db.closeConnection(commit);
         }
 
 
@@ -99,13 +103,15 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public void clearAll() throws DataAccessException{
+        boolean commit = true;
         var conn = db.getConnection();
-        try (var preparedStatement = conn.prepareStatement("TRUNCATE TABLE user")) {
+        try (var preparedStatement = conn.prepareStatement("DELETE FROM user")) {
             preparedStatement.execute();
         } catch (SQLException ex) {
+            commit = false;
             throw new DataAccessException(ex.toString());
         } finally {
-           db.returnConnection(conn);
+           db.closeConnection(commit);
          }
     }
 }

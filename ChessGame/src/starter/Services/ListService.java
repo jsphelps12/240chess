@@ -30,10 +30,7 @@ public class ListService {
                 return new ListResponse("Error: unauthorized",null);
             }
             GameDAO gDAO = new GameDAO();
-            List<GameModel> gList = new ArrayList<>();
-            for(Integer i : gDAO.getGames().keySet()){
-                gList.add(gDAO.readGame(i));
-            }
+            List<GameModel> gList = gDAO.getGames();
             return new ListResponse(null, gList);
         }
         catch (DataAccessException e){

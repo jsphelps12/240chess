@@ -31,15 +31,17 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public void createAuth(Auth a) throws DataAccessException {
+        boolean commit = true;
         var conn = db.getConnection();
         try (var preparedStatement = conn.prepareStatement("INSERT INTO auth (authToken,username) VALUES (?,?)")) {
             preparedStatement.setString(1,a.getAuthToken());
             preparedStatement.setString(2,a.getUsername());
             preparedStatement.execute();
         } catch (SQLException ex) {
+            commit = false;
             throw new DataAccessException(ex.toString());
         } finally {
-            db.returnConnection(conn);
+            db.closeConnection(commit);
         }
 
         //theAuths.put(a.getAuthToken(),a);
@@ -56,6 +58,7 @@ public class AuthDAO {
 //            return theAuths.get(a);
 //        }
 //        return null;
+        boolean commit = true;
         var conn = db.getConnection();
         try (var preparedStatement = conn.prepareStatement("SELECT authToken,username FROM auth WHERE authToken = ?")) {
             preparedStatement.setString(1,a);
@@ -70,9 +73,10 @@ public class AuthDAO {
                 return null;
             }
         } catch (SQLException ex) {
+            commit = false;
             throw new DataAccessException(ex.toString());
         } finally {
-            db.returnConnection(conn);
+            db.closeConnection(commit);
         }
     }
 
@@ -91,14 +95,16 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public void deleteAuth(String a) throws DataAccessException{
+        boolean commit = true;
         var conn = db.getConnection();
         try (var preparedStatement = conn.prepareStatement("DELETE FROM auth WHERE authToken = ?")) {
             preparedStatement.setString(1,a);
             preparedStatement.execute();
         } catch (SQLException ex) {
+            commit = false;
             throw new DataAccessException(ex.toString());
         } finally {
-            db.returnConnection(conn);
+            db.closeConnection(commit);
         }
 
         //theAuths.remove(a);
@@ -109,13 +115,15 @@ public class AuthDAO {
      * @throws DataAccessException
      */
     public void clearAll() throws DataAccessException{
+        boolean commit = true;
         var conn = db.getConnection();
-        try (var preparedStatement = conn.prepareStatement("TRUNCATE TABLE auth")) {
+        try (var preparedStatement = conn.prepareStatement("DELETE FROM auth")) {
             preparedStatement.execute();
         } catch (SQLException ex) {
+            commit = false;
             throw new DataAccessException(ex.toString());
         } finally {
-            db.returnConnection(conn);
+            db.closeConnection(commit);
         }
         //theAuths.clear();
     }

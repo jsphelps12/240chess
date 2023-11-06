@@ -26,7 +26,7 @@ public class CreateService {
             }
             String gName = request.getGameName();
             GameDAO gDAO = new GameDAO();
-            GameModel gModel = new GameModel(gDAO.getGames().size()+1,gName,new Game());
+            GameModel gModel = new GameModel(gName,new Game());
             gDAO.createGame(gModel);
 
             return new CreateResponse(null, gModel.getGameID());

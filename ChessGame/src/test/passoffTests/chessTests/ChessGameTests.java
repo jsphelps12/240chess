@@ -195,6 +195,8 @@ public class ChessGameTests {
         Assertions.assertEquals(ChessGame.TeamColor.BLACK, pawn.getTeamColor(),
                 "Found piece at end position is the wrong team color");
 
+
+
         /*
         | | | | | | |q| |
 		| | | | |n| | | |
