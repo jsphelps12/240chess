@@ -176,7 +176,13 @@ public class GameDAO {
         } catch (SQLException ex) {
             commit = false;
             throw new DataAccessException(ex.toString());
-        } finally {
+        }
+        try(var preparedStatement = conn.prepareStatement("ALTER TABLE game AUTO_INCREMENT = 1")){
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            commit = false;
+            throw new DataAccessException(ex.toString());
+        }finally {
             db.closeConnection(commit);
         }
         //games.clear();

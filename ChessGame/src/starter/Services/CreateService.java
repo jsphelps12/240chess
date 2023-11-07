@@ -25,6 +25,9 @@ public class CreateService {
                 return new CreateResponse("Error: unauthorized",null);
             }
             String gName = request.getGameName();
+            if(gName == null){
+                return new CreateResponse("Error: bad access", null);
+            }
             GameDAO gDAO = new GameDAO();
             GameModel gModel = new GameModel(gName,new Game());
             gDAO.createGame(gModel);

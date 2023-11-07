@@ -15,6 +15,11 @@ public class Auth {
         username = u;
     }
 
+    public Auth(String a,String u){
+        authToken = a;
+        username = u;
+    }
+
     /**
      * authtoken
      */
