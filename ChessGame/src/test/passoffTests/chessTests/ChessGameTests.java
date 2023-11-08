@@ -998,6 +998,7 @@ public class ChessGameTests {
             board.addPiece(knightPosition, knight);
             board.addPiece(rookPosition, rook);
 
+
             //king expected moves
             validMoves.add(TestFactory.getNewMove(kingPosition, TestFactory.getNewPosition(6, 5), null));
 
