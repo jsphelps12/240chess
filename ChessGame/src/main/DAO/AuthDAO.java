@@ -1,12 +1,10 @@
 package DAO;
 
 import Model.Auth;
-import Model.User;
 import dataAccess.DataAccessException;
 import dataAccess.Database;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 
 /**
  * This is the authorization token DAO

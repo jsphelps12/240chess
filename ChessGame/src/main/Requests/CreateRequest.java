@@ -1,7 +1,5 @@
 package Requests;
 
-import Model.Auth;
-
 /**
  * Create Request class
  */

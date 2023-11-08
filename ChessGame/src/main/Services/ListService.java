@@ -2,15 +2,10 @@ package Services;
 
 import DAO.AuthDAO;
 import DAO.GameDAO;
-import Model.Auth;
 import Model.GameModel;
-import Responses.JoinResponse;
 import Responses.ListResponse;
 import dataAccess.DataAccessException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 /**

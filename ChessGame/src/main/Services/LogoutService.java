@@ -1,7 +1,6 @@
 package Services;
 
 import DAO.AuthDAO;
-import Model.Auth;
 import Responses.LogoutResponse;
 import dataAccess.DataAccessException;
 

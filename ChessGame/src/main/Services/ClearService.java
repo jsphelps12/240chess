@@ -2,7 +2,6 @@ package Services;
 
 import DAO.*;
 import Responses.ClearResponse;
-import Responses.RegisterResponse;
 import dataAccess.DataAccessException;
 
 /**

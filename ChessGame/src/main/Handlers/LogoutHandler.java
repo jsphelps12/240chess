@@ -1,6 +1,5 @@
 package Handlers;
 
-import Model.Auth;
 import Responses.LogoutResponse;
 import Services.LogoutService;
 import com.google.gson.Gson;

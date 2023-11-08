@@ -1,13 +1,10 @@
 package DAO;
 
 import Model.Auth;
-import Model.User;
 import dataAccess.DataAccessException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AuthDAOTest {
 

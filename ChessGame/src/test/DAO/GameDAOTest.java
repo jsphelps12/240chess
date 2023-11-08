@@ -1,6 +1,5 @@
 package DAO;
 
-import Model.Auth;
 import Model.GameModel;
 import chess.Game;
 import dataAccess.DataAccessException;
@@ -9,8 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameDAOTest {
 
