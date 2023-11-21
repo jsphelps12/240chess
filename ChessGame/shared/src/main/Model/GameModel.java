@@ -37,6 +37,10 @@ public class GameModel {
         this.game = g;
     }
 
+    public String toString(){
+        return game.toString();
+    }
+
     /**
      * Game ID
      */
@@ -108,6 +112,9 @@ public class GameModel {
      */
     public ChessGame getGame(){
         return game;
+    }
+    public String getGameString(){
+        return game.toString();
     }
 
 }

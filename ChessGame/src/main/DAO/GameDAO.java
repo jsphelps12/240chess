@@ -37,7 +37,7 @@ public class GameDAO {
             preparedStatement.setString(1,g.getWhiteUsername());
             preparedStatement.setString(2,g.getBlackUsername());
             preparedStatement.setString(3,g.getGameName());
-            preparedStatement.setString(4,g.getGame().toString());
+            preparedStatement.setString(4,g.getGameString());
             preparedStatement.execute();
         } catch (SQLException ex) {
             commit = false;
@@ -206,7 +206,7 @@ public class GameDAO {
                     String name = rs.getString("name");
                     String codifiedGame = rs.getString("board");
                     Game game = new Game(codifiedGame);
-                    GameModel gm = new GameModel(id,white,black,name,game);
+                    GameModel gm = new GameModel(id,white,black,name,null);
                     theList.add(gm);
                 }
             }

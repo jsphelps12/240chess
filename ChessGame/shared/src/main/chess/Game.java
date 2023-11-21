@@ -7,6 +7,7 @@ public class Game implements ChessGame{
 
     public Game(){
         this.color = TeamColor.WHITE;
+        this.gameBoard.resetBoard();
     }
 
     public Game(String s){
