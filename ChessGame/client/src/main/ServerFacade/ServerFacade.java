@@ -31,13 +31,25 @@ public class ServerFacade{
         // Make the request
         http.connect();
 
-        // Output the response body
-        try (InputStream respBody = http.getInputStream()) {
+        if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            // Output the response body
+            try (InputStream respBody = http.getInputStream()) {
+                InputStreamReader inputStreamReader = new InputStreamReader(respBody);
+                Gson gson = new Gson();
+                Map responseBody = gson.fromJson(inputStreamReader, Map.class);
+                return responseBody;
+            }
+        }
+        else{
+            InputStream respBody = http.getErrorStream();
             InputStreamReader inputStreamReader = new InputStreamReader(respBody);
             Gson gson = new Gson();
             Map responseBody = gson.fromJson(inputStreamReader, Map.class);
             return responseBody;
         }
+
+
+
     }
 
     public static Map loginHelper(String[] args) throws Exception{
@@ -61,8 +73,17 @@ public class ServerFacade{
         // Make the request
         http.connect();
 
-        // Output the response body
-        try (InputStream respBody = http.getInputStream()) {
+        if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            // Output the response body
+            try (InputStream respBody = http.getInputStream()) {
+                InputStreamReader inputStreamReader = new InputStreamReader(respBody);
+                Gson gson = new Gson();
+                Map responseBody = gson.fromJson(inputStreamReader, Map.class);
+                return responseBody;
+            }
+        }
+        else{
+            InputStream respBody = http.getErrorStream();
             InputStreamReader inputStreamReader = new InputStreamReader(respBody);
             Gson gson = new Gson();
             Map responseBody = gson.fromJson(inputStreamReader, Map.class);
@@ -85,8 +106,17 @@ public class ServerFacade{
         // Make the request
         http.connect();
 
-        // Output the response body
-        try (InputStream respBody = http.getInputStream()) {
+        if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            // Output the response body
+            try (InputStream respBody = http.getInputStream()) {
+                InputStreamReader inputStreamReader = new InputStreamReader(respBody);
+                Gson gson = new Gson();
+                Map responseBody = gson.fromJson(inputStreamReader, Map.class);
+                return responseBody;
+            }
+        }
+        else{
+            InputStream respBody = http.getErrorStream();
             InputStreamReader inputStreamReader = new InputStreamReader(respBody);
             Gson gson = new Gson();
             Map responseBody = gson.fromJson(inputStreamReader, Map.class);
@@ -116,8 +146,17 @@ public class ServerFacade{
         // Make the request
         http.connect();
 
-        // Output the response body
-        try (InputStream respBody = http.getInputStream()) {
+        if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            // Output the response body
+            try (InputStream respBody = http.getInputStream()) {
+                InputStreamReader inputStreamReader = new InputStreamReader(respBody);
+                Gson gson = new Gson();
+                Map responseBody = gson.fromJson(inputStreamReader, Map.class);
+                return responseBody;
+            }
+        }
+        else{
+            InputStream respBody = http.getErrorStream();
             InputStreamReader inputStreamReader = new InputStreamReader(respBody);
             Gson gson = new Gson();
             Map responseBody = gson.fromJson(inputStreamReader, Map.class);
@@ -140,8 +179,18 @@ public class ServerFacade{
         // Make the request
         http.connect();
 
-        // Output the response body
-        try (InputStream respBody = http.getInputStream()) {
+
+        if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            // Output the response body
+            try (InputStream respBody = http.getInputStream()) {
+                InputStreamReader inputStreamReader = new InputStreamReader(respBody);
+                Gson gson = new Gson();
+                ListResponse responseBody = gson.fromJson(inputStreamReader, ListResponse.class);
+                return responseBody;
+            }
+        }
+        else{
+            InputStream respBody = http.getErrorStream();
             InputStreamReader inputStreamReader = new InputStreamReader(respBody);
             Gson gson = new Gson();
             ListResponse responseBody = gson.fromJson(inputStreamReader, ListResponse.class);
@@ -172,8 +221,17 @@ public class ServerFacade{
         // Make the request
         http.connect();
 
-        // Output the response body
-        try (InputStream respBody = http.getInputStream()){
+        if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            // Output the response body
+            try (InputStream respBody = http.getInputStream()) {
+                InputStreamReader inputStreamReader = new InputStreamReader(respBody);
+                Gson gson = new Gson();
+                Map responseBody = gson.fromJson(inputStreamReader, Map.class);
+                return responseBody;
+            }
+        }
+        else{
+            InputStream respBody = http.getErrorStream();
             InputStreamReader inputStreamReader = new InputStreamReader(respBody);
             Gson gson = new Gson();
             Map responseBody = gson.fromJson(inputStreamReader, Map.class);
@@ -203,8 +261,17 @@ public class ServerFacade{
         // Make the request
         http.connect();
 
-        // Output the response body
-        try (InputStream respBody = http.getInputStream()){
+        if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            // Output the response body
+            try (InputStream respBody = http.getInputStream()) {
+                InputStreamReader inputStreamReader = new InputStreamReader(respBody);
+                Gson gson = new Gson();
+                Map responseBody = gson.fromJson(inputStreamReader, Map.class);
+                return responseBody;
+            }
+        }
+        else{
+            InputStream respBody = http.getErrorStream();
             InputStreamReader inputStreamReader = new InputStreamReader(respBody);
             Gson gson = new Gson();
             Map responseBody = gson.fromJson(inputStreamReader, Map.class);

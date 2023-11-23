@@ -47,13 +47,22 @@ public class Client {
 /* needs a username, a password, and an email. Calls the login API, then moves us to postlogin*/
     public static void registerOption(String[] arguments) throws Exception{
         Map response = registerHelper(arguments);
+        if(response.containsKey("message")){
+            System.out.print(response.get("message"));
+            return;
+        }
         authToken = response.get("authToken").toString();
+
         PostLogin postLogin = new PostLogin();
         postLogin.main(authToken, response.get("username").toString());
         authToken = null;
     }
     public static void loginOption(String[] arguments) throws Exception{
         Map response = loginHelper(arguments);
+        if(response.containsKey("message")){
+            System.out.print(response.get("message"));
+            return;
+        }
         authToken = response.get("authToken").toString();
         PostLogin postLogin = new PostLogin();
         postLogin.main(authToken, response.get("username").toString());

@@ -217,18 +217,28 @@ public class PostLogin {
 
     public static void joinOption(String[] arguments) throws Exception{
         Map response = joinHelper(arguments,authToken);
+        if(response.containsKey("message")){
+            System.out.print(response.get("message"));
+            return;
+        }
         drawBoards();
-        var x = 0;
     }
 
     public static void observeOption(String[] arguments) throws Exception{
         Map response = observeHelper(arguments,authToken);
+        if(response.containsKey("message")){
+            System.out.print(response.get("message"));
+            return;
+        }
         drawBoards();
-        var x = 0;
     }
 
     public static void listOption(String[] arguments) throws Exception{
         ListResponse response = listHelper(arguments,authToken);
+        if(response.getMessage() != null){
+            System.out.print(response.getMessage());
+            return;
+        }
         List<GameModel> games = response.getGames();
         for(GameModel g : games){
             System.out.print("ID: " + g.getGameID() + " Name: " + g.getGameName());
@@ -240,16 +250,21 @@ public class PostLogin {
             }
             System.out.print("\n");
         }
-        var x = 0;
     }
     public static void logoutOption(String[] arguments) throws Exception{
         Map response = logoutHelper(arguments,authToken);
-        var x = 0;
+        if(response.containsKey("message")){
+            System.out.print(response.get("message"));
+            return;
+        }
     }
 
     public static void createOption(String[] arguments) throws Exception{
         Map response = createHelper(arguments,authToken);
-        var x = 0;
+        if(response.containsKey("message")){
+            System.out.print(response.get("message"));
+            return;
+        }
     }
 
 
