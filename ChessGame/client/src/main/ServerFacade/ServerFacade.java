@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ServerFacade{
@@ -20,6 +21,12 @@ public class ServerFacade{
 
         // Write out a header
         http.addRequestProperty("Content-Type", "application/json");
+
+        if(args.length != 4){
+            Map respBody = new HashMap();
+            respBody.put("message","Error: Wrong number of Arguments");
+            return respBody;
+        }
 
         // Write out the body
         var body = Map.of("username", args[1], "password", args[2],"email",args[3]);
@@ -62,6 +69,12 @@ public class ServerFacade{
 
         // Write out a header
         http.addRequestProperty("Content-Type", "application/json");
+
+        if(args.length != 3){
+            Map respBody = new HashMap();
+            respBody.put("message","Error: Wrong number of Arguments");
+            return respBody;
+        }
 
         // Write out the body
         var body = Map.of("username", args[1], "password", args[2]);
@@ -135,6 +148,13 @@ public class ServerFacade{
         // Write out a header
         http.addRequestProperty("Content-Type", "application/json");
         http.addRequestProperty("authorization",auth);
+
+        if(args.length != 2){
+            Map respBody = new HashMap();
+            respBody.put("message","Error: Wrong number of Arguments");
+            return respBody;
+        }
+
 
         // Write out the body
         var body = Map.of("gameName", args[1]);
@@ -210,6 +230,12 @@ public class ServerFacade{
         http.addRequestProperty("Content-Type", "application/json");
         http.addRequestProperty("authorization",auth);
 
+        if(args.length != 2){
+            Map respBody = new HashMap();
+            respBody.put("message","Error: Wrong number of Arguments");
+            return respBody;
+        }
+
         // Write out the body
         int id = Integer.parseInt(args[1]);
         var body = Map.of("gameID", id);
@@ -250,9 +276,24 @@ public class ServerFacade{
         http.addRequestProperty("Content-Type", "application/json");
         http.addRequestProperty("authorization",auth);
 
+        if(args.length != 3){
+            Map respBody = new HashMap();
+            respBody.put("message","Error: Wrong number of Arguments");
+            return respBody;
+        }
+        if(args[2] != null) {
+            String color = args[2].toUpperCase();
+            if (color != "WHITE" || color != "BLACK") {
+                Map respBody = new HashMap();
+                respBody.put("message", "Error: Not an acceptable color");
+                return respBody;
+            }
+        }
+
         // Write out the body
+        String color = args[2].toUpperCase();
         int id = Integer.parseInt(args[1]);
-        var body = Map.of("playerColor",args[2],"gameID", id);
+        var body = Map.of("playerColor",color,"gameID", id);
         try (var outputStream = http.getOutputStream()) {
             var jsonBody = new Gson().toJson(body);
             outputStream.write(jsonBody.getBytes());

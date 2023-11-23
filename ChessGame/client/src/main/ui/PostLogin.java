@@ -219,6 +219,7 @@ public class PostLogin {
         Map response = joinHelper(arguments,authToken);
         if(response.containsKey("message")){
             System.out.print(response.get("message"));
+            System.out.print("\n");
             return;
         }
         drawBoards();
@@ -228,6 +229,7 @@ public class PostLogin {
         Map response = observeHelper(arguments,authToken);
         if(response.containsKey("message")){
             System.out.print(response.get("message"));
+            System.out.print("\n");
             return;
         }
         drawBoards();
@@ -237,6 +239,7 @@ public class PostLogin {
         ListResponse response = listHelper(arguments,authToken);
         if(response.getMessage() != null){
             System.out.print(response.getMessage());
+            System.out.print("\n");
             return;
         }
         List<GameModel> games = response.getGames();
@@ -255,6 +258,7 @@ public class PostLogin {
         Map response = logoutHelper(arguments,authToken);
         if(response.containsKey("message")){
             System.out.print(response.get("message"));
+            System.out.print("\n");
             return;
         }
     }
@@ -263,6 +267,7 @@ public class PostLogin {
         Map response = createHelper(arguments,authToken);
         if(response.containsKey("message")){
             System.out.print(response.get("message"));
+            System.out.print("\n");
             return;
         }
     }

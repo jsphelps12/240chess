@@ -49,6 +49,7 @@ public class Client {
         Map response = registerHelper(arguments);
         if(response.containsKey("message")){
             System.out.print(response.get("message"));
+            System.out.print("\n");
             return;
         }
         authToken = response.get("authToken").toString();
@@ -61,6 +62,7 @@ public class Client {
         Map response = loginHelper(arguments);
         if(response.containsKey("message")){
             System.out.print(response.get("message"));
+            System.out.print("\n");
             return;
         }
         authToken = response.get("authToken").toString();
