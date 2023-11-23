@@ -1,5 +1,7 @@
 package chess;
 
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -7,7 +9,7 @@ public class Game implements ChessGame{
 
     public Game(){
         this.color = TeamColor.WHITE;
-        this.gameBoard.resetBoard();
+        //this.gameBoard.resetBoard();
     }
 
     public Game(String s){
@@ -127,7 +129,7 @@ public class Game implements ChessGame{
 
     private ChessGame.TeamColor color ;
 
-    private ChessBoard gameBoard = new Board();
+    public ChessBoard gameBoard = new Board();
 
     public String toString(){
         StringBuilder output = new StringBuilder();
@@ -174,6 +176,10 @@ public class Game implements ChessGame{
             }
         }
         return output.toString();
+    }
+
+    public void resetBoard(){
+        gameBoard.resetBoard();
     }
 
 

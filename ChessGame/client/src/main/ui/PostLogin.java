@@ -2,8 +2,11 @@ package ui;
 
 import Model.GameModel;
 import Responses.ListResponse;
+import chess.Game;
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +17,11 @@ import static ui.EscapeSequences.*;
 
 public class PostLogin {
 
+    private Game tempGame = new Game();
+
     private static String authToken = null;
     public void main(String auth, String username) throws Exception{
+        tempGame.resetBoard();
         authToken =  auth;
         System.out.print(SET_TEXT_COLOR_WHITE);
         System.out.println("Logged in as " + username + "!");
@@ -43,10 +49,18 @@ public class PostLogin {
             else if(arguments[0].equals("join")){
                 joinOption(arguments);
             }
+
         }
     }
 
-    public static void drawBoards(int id){
+    public static void drawBoards(){
+        var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+        out.print(ERASE_SCREEN);
+        out.print(SET_TEXT_COLOR_BLACK);
+        out.print(SET_BG_COLOR_LIGHT_GREY);
+        out.print(SET_TEXT_BOLD);
+        out.print("    1  2  3  4  5  6  7  8    ");
+
 
     }
 
