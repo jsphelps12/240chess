@@ -138,7 +138,7 @@ public class PostLogin {
         out.print(SET_TEXT_COLOR_BLACK);
         out.print(SET_BG_COLOR_LIGHT_GREY);
         out.print(SET_TEXT_BOLD);
-        out.print("    A  B  C  D  E  F  G  H    ");
+        out.print("    H  G  F  E  D  C  B  A    ");
         out.print(RESET_BG_COLOR);
         out.print("\n");
         boolean whiteSquare = false;
@@ -146,13 +146,13 @@ public class PostLogin {
             out.print(SET_TEXT_COLOR_BLACK);
             out.print(SET_BG_COLOR_LIGHT_GREY);
             out.print( " " + i + " ");
-            if(i%2 != 0){
+            if(i%2 == 0){
                 whiteSquare = true;
             }
             else{
                 whiteSquare = false;
             }
-            for(int j = 1; j < 9; j++){
+            for(int j = 8; j > 0; j--){
                 out.print(SET_BG_COLOR_RED);
                 if(whiteSquare){
                     out.print(SET_BG_COLOR_BLUE);
@@ -202,7 +202,7 @@ public class PostLogin {
         out.print(SET_TEXT_COLOR_BLACK);
         out.print(SET_BG_COLOR_LIGHT_GREY);
         out.print(SET_TEXT_BOLD);
-        out.print("    A  B  C  D  E  F  G  H    ");
+        out.print("    H  G  F  E  D  C  B  A    ");
         out.print(RESET_BG_COLOR);
         out.print("\n");
 
