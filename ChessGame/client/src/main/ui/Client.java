@@ -27,17 +27,18 @@ public class Client {
             Scanner scanner = new Scanner(System.in);
             var line = scanner.nextLine();
             var arguments = line.split(" ");
+            String command = arguments[0].toLowerCase();
 
-            if(arguments[0].equals("help")){
+            if(command.equals("help")){
                 helpOption();
             }
-            else if(arguments[0].equals("login")){
+            else if(command.equals("login")){
                 loginOption(arguments);
             }
-            else if(arguments[0].equals("register")){
+            else if(command.equals("register")){
                 registerOption(arguments);
             }
-            else if(arguments[0].equals("quit")){
+            else if(command.equals("quit")){
                 break;
             }
         }

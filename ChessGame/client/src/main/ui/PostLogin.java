@@ -32,24 +32,25 @@ public class PostLogin {
             Scanner scanner = new Scanner(System.in);
             var line = scanner.nextLine();
             var arguments = line.split(" ");
+            String command = arguments[0].toLowerCase();
 
-            if(arguments[0].equals("help")){
+            if(command.equals("help")){
                 helpOption();
             }
-            else if(arguments[0].equals("logout")){
+            else if(command.equals("logout")){
                 logoutOption(arguments);
                 break;
             }
-            else if(arguments[0].equals("create")){
+            else if(command.equals("create")){
                 createOption(arguments);
             }
-            else if(arguments[0].equals("list")){
+            else if(command.equals("list")){
                 listOption(arguments);
             }
-            else if(arguments[0].equals("observe")){
+            else if(command.equals("observe")){
                 observeOption(arguments);
             }
-            else if(arguments[0].equals("join")){
+            else if(command.equals("join")){
                 joinOption(arguments);
             }
 
