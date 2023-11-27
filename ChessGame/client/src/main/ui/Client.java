@@ -89,6 +89,7 @@ public class Client {
         System.out.printf("help");
         System.out.print(SET_TEXT_COLOR_MAGENTA);
         System.out.printf(" - possible commands\n");
+        System.out.print(SET_TEXT_COLOR_WHITE);
     }
 
 }

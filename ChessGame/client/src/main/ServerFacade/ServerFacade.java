@@ -235,9 +235,17 @@ public class ServerFacade{
             respBody.put("message","Error: Wrong number of Arguments");
             return respBody;
         }
+        int id;
+        try{
+            id = Integer.parseInt(args[1]);
+        } catch(Exception e){
+            Map respBody = new HashMap();
+            respBody.put("message","Not a valid id");
+            return respBody;
+        }
 
         // Write out the body
-        int id = Integer.parseInt(args[1]);
+//        int id = Integer.parseInt(args[1]);
         var body = Map.of("gameID", id);
         try (var outputStream = http.getOutputStream()) {
             var jsonBody = new Gson().toJson(body);
@@ -289,8 +297,16 @@ public class ServerFacade{
                 respBody.put("message", "Error: Not an acceptable color");
                 return respBody;
             }
+            int id;
+            try{
+                id = Integer.parseInt(args[1]);
+            } catch(Exception e){
+                Map respBody = new HashMap();
+                respBody.put("message","Not a valid id");
+                return respBody;
+            }
             // Write out the body
-            int id = Integer.parseInt(args[1]);
+//            int id = Integer.parseInt(args[1]);
             var body = Map.of("playerColor",color,"gameID", id);
             try (var outputStream = http.getOutputStream()) {
                 var jsonBody = new Gson().toJson(body);

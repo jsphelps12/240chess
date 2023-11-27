@@ -59,7 +59,7 @@ public class PostLogin {
 
     public static void drawWhiteSide(){
         var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-        out.print(ERASE_SCREEN);
+//        out.print(ERASE_SCREEN);
         out.print(SET_TEXT_COLOR_BLACK);
         out.print(SET_BG_COLOR_LIGHT_GREY);
         out.print(SET_TEXT_BOLD);
@@ -123,7 +123,7 @@ public class PostLogin {
             out.print(RESET_BG_COLOR);
             out.print("\n");
         }
-        out.print(ERASE_SCREEN);
+//        out.print(ERASE_SCREEN);
         out.print(SET_TEXT_COLOR_BLACK);
         out.print(SET_BG_COLOR_LIGHT_GREY);
         out.print(SET_TEXT_BOLD);
@@ -134,7 +134,7 @@ public class PostLogin {
     }
     public static void drawBlackSide(){
         var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-        out.print(ERASE_SCREEN);
+//        out.print(ERASE_SCREEN);
         out.print(SET_TEXT_COLOR_BLACK);
         out.print(SET_BG_COLOR_LIGHT_GREY);
         out.print(SET_TEXT_BOLD);
@@ -198,7 +198,7 @@ public class PostLogin {
             out.print(RESET_BG_COLOR);
             out.print("\n");
         }
-        out.print(ERASE_SCREEN);
+//        out.print(ERASE_SCREEN);
         out.print(SET_TEXT_COLOR_BLACK);
         out.print(SET_BG_COLOR_LIGHT_GREY);
         out.print(SET_TEXT_BOLD);
@@ -210,9 +210,11 @@ public class PostLogin {
 
     public static void drawBoards(){
         drawWhiteSide();
-        System.out.print("\n\n");
         drawBlackSide();
-
+        System.out.print(RESET_TEXT_COLOR);
+        System.out.print("\n\n");
+        System.out.print(RESET_BG_COLOR);
+        System.out.print(SET_TEXT_COLOR_WHITE);
 
     }
 
@@ -299,6 +301,7 @@ public class PostLogin {
         System.out.printf("help");
         System.out.print(SET_TEXT_COLOR_MAGENTA);
         System.out.printf(" - possible commands\n");
+        System.out.print(SET_TEXT_COLOR_WHITE);
     }
 
 
