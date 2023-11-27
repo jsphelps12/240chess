@@ -276,28 +276,38 @@ public class ServerFacade{
         http.addRequestProperty("Content-Type", "application/json");
         http.addRequestProperty("authorization",auth);
 
-        if(args.length != 3){
+        if(args.length != 3 && args.length !=2){
             Map respBody = new HashMap();
             respBody.put("message","Error: Wrong number of Arguments");
             return respBody;
         }
-        if(args[2] != null) {
-            String color = args[2].toUpperCase();
-            if (color != "WHITE" || color != "BLACK") {
+        String color = null;
+        if(args.length == 3) {
+            color = args[2].toUpperCase();
+            if (!color.equals("WHITE") && !color.equals("BLACK")) {
                 Map respBody = new HashMap();
                 respBody.put("message", "Error: Not an acceptable color");
                 return respBody;
             }
+            // Write out the body
+            int id = Integer.parseInt(args[1]);
+            var body = Map.of("playerColor",color,"gameID", id);
+            try (var outputStream = http.getOutputStream()) {
+                var jsonBody = new Gson().toJson(body);
+                outputStream.write(jsonBody.getBytes());
+            }
+        }
+        else {
+            // Write out the body
+            int id = Integer.parseInt(args[1]);
+            var body = Map.of("gameID", id);
+            try (var outputStream = http.getOutputStream()) {
+                var jsonBody = new Gson().toJson(body);
+                outputStream.write(jsonBody.getBytes());
+            }
         }
 
-        // Write out the body
-        String color = args[2].toUpperCase();
-        int id = Integer.parseInt(args[1]);
-        var body = Map.of("playerColor",color,"gameID", id);
-        try (var outputStream = http.getOutputStream()) {
-            var jsonBody = new Gson().toJson(body);
-            outputStream.write(jsonBody.getBytes());
-        }
+
 
         // Make the request
         http.connect();
