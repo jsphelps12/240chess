@@ -106,9 +106,7 @@ public class GameDAO {
      * @param i index of game we are updating
      * @throws DataAccessException
      */
-    public void updateGame(Integer i) throws DataAccessException{
 
-    }
 
     public void updateWhiteUserName(Integer i, String user) throws DataAccessException {
 //        GameModel g = readGame(i);
@@ -145,7 +143,7 @@ public class GameDAO {
         }
     }
 
-    public void board(Integer i, String newBoard) throws DataAccessException {
+    public void updateBoard(Integer i, String newBoard) throws DataAccessException {
 //        GameModel g = readGame(i);
 //        g.setBlackUsername(user);
         boolean commit = true;

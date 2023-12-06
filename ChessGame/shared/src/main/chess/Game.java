@@ -9,15 +9,22 @@ public class Game implements ChessGame{
 
     public Game(){
         this.color = TeamColor.WHITE;
-        //this.gameBoard.resetBoard();
+        this.gameOver = false;
+        this.gameBoard.resetBoard();
     }
 
-    public Game(String s){
+    public Game(String s) {
         if(s.charAt(0) == 'W'){
             this.color = TeamColor.WHITE;
         }
         else{
             this.color = TeamColor.BLACK;
+        }
+        s = s.substring(1);
+        if(s.charAt(0) == 'L'){
+            gameOver = true;
+        }else{
+            gameOver = false;
         }
         s = s.substring(1);
         while(s.length() >4){
@@ -131,6 +138,8 @@ public class Game implements ChessGame{
 
     public ChessBoard gameBoard = new Board();
 
+    Boolean gameOver;
+
     public String toString(){
         StringBuilder output = new StringBuilder();
         if(color == TeamColor.WHITE){
@@ -138,6 +147,12 @@ public class Game implements ChessGame{
         }
         else{
             output.append('B');
+        }
+        if(gameOver == true){
+            output.append('L');
+        }
+        else{
+            output.append('U');
         }
         for(int i = 0;i < 9;i++){
             for(int j = 0;j<9;j++){
@@ -337,6 +352,7 @@ public class Game implements ChessGame{
                 }
             }
         }
+        gameOver = true;
         return true;
     }
 
@@ -360,6 +376,7 @@ public class Game implements ChessGame{
                 }
             }
         }
+        gameOver = true;
         return true;
     }
 
@@ -372,4 +389,16 @@ public class Game implements ChessGame{
     public ChessBoard getBoard() {
         return gameBoard;
     }
+
+    public void resign(){
+        gameOver = true;
+    }
+    public void setGameOver(Boolean b){
+        gameOver = b;
+    }
+
+    public Boolean getGameOver(){
+        return gameOver;
+    }
 }
+

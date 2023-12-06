@@ -21,7 +21,7 @@ import static ui.EscapeSequences.*;
 
 public class PostLogin {
 
-    public static Game tempGame = new Game();
+    //public static Game tempGame = new Game();
 
     public static Gson gson = new Gson();
 
@@ -29,7 +29,7 @@ public class PostLogin {
 
     private static String authToken = null;
     public void main(String auth, String username) throws Exception{
-        tempGame.resetBoard();
+        //tempGame.resetBoard();
         authToken =  auth;
         wsClient = new WSClient("http://localhost:6969");
         System.out.print(SET_TEXT_COLOR_WHITE);
@@ -63,166 +63,166 @@ public class PostLogin {
         }
     }
 
-    public static void drawWhiteSide(){
-        var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-//        out.print(ERASE_SCREEN);
-        out.print(SET_TEXT_COLOR_BLACK);
-        out.print(SET_BG_COLOR_LIGHT_GREY);
-        out.print(SET_TEXT_BOLD);
-        out.print("    A  B  C  D  E  F  G  H    ");
-        out.print(RESET_BG_COLOR);
-        out.print("\n");
-        boolean whiteSquare = false;
-        for(int i = 8; i > 0; i--){
-            out.print(SET_TEXT_COLOR_BLACK);
-            out.print(SET_BG_COLOR_LIGHT_GREY);
-            out.print( " " + i + " ");
-            if(i%2 != 0){
-                whiteSquare = true;
-            }
-            else{
-                whiteSquare = false;
-            }
-            for(int j = 1; j < 9; j++){
-                out.print(SET_BG_COLOR_RED);
-                if(whiteSquare){
-                    out.print(SET_BG_COLOR_BLUE);
-                }
-                Position checkPos = new Position(i,j);
-                if(tempGame.gameBoard.getPiece(checkPos) == null){
-                    out.print("   ");
-                }
-                else{
-                    out.print(SET_TEXT_COLOR_WHITE);
-                    if(tempGame.gameBoard.getPiece(checkPos).getTeamColor() == ChessGame.TeamColor.BLACK){
-                        out.print(SET_TEXT_COLOR_BLACK);
-                    }
-                    if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KING){
-                        out.print(BLACK_KING);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.QUEEN){
-                        out.print(BLACK_QUEEN);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.ROOK){
-                        out.print(BLACK_ROOK);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.BISHOP){
-                        out.print(BLACK_BISHOP);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KNIGHT){
-                        out.print(BLACK_KNIGHT);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.PAWN){
-                        out.print(BLACK_PAWN);
-                    }
-                }
-                if(whiteSquare){
-                    whiteSquare = false;
-                }
-                else {
-                    whiteSquare = true;
-                }
-            }
-            out.print(SET_TEXT_COLOR_BLACK);
-            out.print(SET_BG_COLOR_LIGHT_GREY);
-            out.print( " " + i + " ");
-            out.print(RESET_BG_COLOR);
-            out.print("\n");
-        }
-//        out.print(ERASE_SCREEN);
-        out.print(SET_TEXT_COLOR_BLACK);
-        out.print(SET_BG_COLOR_LIGHT_GREY);
-        out.print(SET_TEXT_BOLD);
-        out.print("    A  B  C  D  E  F  G  H    ");
-        out.print(RESET_BG_COLOR);
-        out.print("\n");
+//    public static void drawWhiteSide(){
+//        var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+////        out.print(ERASE_SCREEN);
+//        out.print(SET_TEXT_COLOR_BLACK);
+//        out.print(SET_BG_COLOR_LIGHT_GREY);
+//        out.print(SET_TEXT_BOLD);
+//        out.print("    A  B  C  D  E  F  G  H    ");
+//        out.print(RESET_BG_COLOR);
+//        out.print("\n");
+//        boolean whiteSquare = false;
+//        for(int i = 8; i > 0; i--){
+//            out.print(SET_TEXT_COLOR_BLACK);
+//            out.print(SET_BG_COLOR_LIGHT_GREY);
+//            out.print( " " + i + " ");
+//            if(i%2 != 0){
+//                whiteSquare = true;
+//            }
+//            else{
+//                whiteSquare = false;
+//            }
+//            for(int j = 1; j < 9; j++){
+//                out.print(SET_BG_COLOR_RED);
+//                if(whiteSquare){
+//                    out.print(SET_BG_COLOR_BLUE);
+//                }
+//                Position checkPos = new Position(i,j);
+//                if(tempGame.gameBoard.getPiece(checkPos) == null){
+//                    out.print("   ");
+//                }
+//                else{
+//                    out.print(SET_TEXT_COLOR_WHITE);
+//                    if(tempGame.gameBoard.getPiece(checkPos).getTeamColor() == ChessGame.TeamColor.BLACK){
+//                        out.print(SET_TEXT_COLOR_BLACK);
+//                    }
+//                    if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KING){
+//                        out.print(BLACK_KING);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.QUEEN){
+//                        out.print(BLACK_QUEEN);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.ROOK){
+//                        out.print(BLACK_ROOK);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.BISHOP){
+//                        out.print(BLACK_BISHOP);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KNIGHT){
+//                        out.print(BLACK_KNIGHT);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.PAWN){
+//                        out.print(BLACK_PAWN);
+//                    }
+//                }
+//                if(whiteSquare){
+//                    whiteSquare = false;
+//                }
+//                else {
+//                    whiteSquare = true;
+//                }
+//            }
+//            out.print(SET_TEXT_COLOR_BLACK);
+//            out.print(SET_BG_COLOR_LIGHT_GREY);
+//            out.print( " " + i + " ");
+//            out.print(RESET_BG_COLOR);
+//            out.print("\n");
+//        }
+////        out.print(ERASE_SCREEN);
+//        out.print(SET_TEXT_COLOR_BLACK);
+//        out.print(SET_BG_COLOR_LIGHT_GREY);
+//        out.print(SET_TEXT_BOLD);
+//        out.print("    A  B  C  D  E  F  G  H    ");
+//        out.print(RESET_BG_COLOR);
+//        out.print("\n");
+//
+//    }
+//    public static void drawBlackSide(){
+//        var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+////        out.print(ERASE_SCREEN);
+//        out.print(SET_TEXT_COLOR_BLACK);
+//        out.print(SET_BG_COLOR_LIGHT_GREY);
+//        out.print(SET_TEXT_BOLD);
+//        out.print("    H  G  F  E  D  C  B  A    ");
+//        out.print(RESET_BG_COLOR);
+//        out.print("\n");
+//        boolean whiteSquare = false;
+//        for(int i = 1; i < 9; i++){
+//            out.print(SET_TEXT_COLOR_BLACK);
+//            out.print(SET_BG_COLOR_LIGHT_GREY);
+//            out.print( " " + i + " ");
+//            if(i%2 == 0){
+//                whiteSquare = true;
+//            }
+//            else{
+//                whiteSquare = false;
+//            }
+//            for(int j = 8; j > 0; j--){
+//                out.print(SET_BG_COLOR_RED);
+//                if(whiteSquare){
+//                    out.print(SET_BG_COLOR_BLUE);
+//                }
+//                Position checkPos = new Position(i,j);
+//                if(tempGame.gameBoard.getPiece(checkPos) == null){
+//                    out.print("   ");
+//                }
+//                else{
+//                    out.print(SET_TEXT_COLOR_WHITE);
+//                    if(tempGame.gameBoard.getPiece(checkPos).getTeamColor() == ChessGame.TeamColor.BLACK){
+//                        out.print(SET_TEXT_COLOR_BLACK);
+//                    }
+//                    if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KING){
+//                        out.print(BLACK_KING);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.QUEEN){
+//                        out.print(BLACK_QUEEN);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.ROOK){
+//                        out.print(BLACK_ROOK);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.BISHOP){
+//                        out.print(BLACK_BISHOP);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KNIGHT){
+//                        out.print(BLACK_KNIGHT);
+//                    }
+//                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.PAWN){
+//                        out.print(BLACK_PAWN);
+//                    }
+//                }
+//                if(whiteSquare){
+//                    whiteSquare = false;
+//                }
+//                else {
+//                    whiteSquare = true;
+//                }
+//            }
+//            out.print(SET_TEXT_COLOR_BLACK);
+//            out.print(SET_BG_COLOR_LIGHT_GREY);
+//            out.print( " " + i + " ");
+//            out.print(RESET_BG_COLOR);
+//            out.print("\n");
+//        }
+////        out.print(ERASE_SCREEN);
+//        out.print(SET_TEXT_COLOR_BLACK);
+//        out.print(SET_BG_COLOR_LIGHT_GREY);
+//        out.print(SET_TEXT_BOLD);
+//        out.print("    H  G  F  E  D  C  B  A    ");
+//        out.print(RESET_BG_COLOR);
+//        out.print("\n");
+//
+//    }
 
-    }
-    public static void drawBlackSide(){
-        var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-//        out.print(ERASE_SCREEN);
-        out.print(SET_TEXT_COLOR_BLACK);
-        out.print(SET_BG_COLOR_LIGHT_GREY);
-        out.print(SET_TEXT_BOLD);
-        out.print("    H  G  F  E  D  C  B  A    ");
-        out.print(RESET_BG_COLOR);
-        out.print("\n");
-        boolean whiteSquare = false;
-        for(int i = 1; i < 9; i++){
-            out.print(SET_TEXT_COLOR_BLACK);
-            out.print(SET_BG_COLOR_LIGHT_GREY);
-            out.print( " " + i + " ");
-            if(i%2 == 0){
-                whiteSquare = true;
-            }
-            else{
-                whiteSquare = false;
-            }
-            for(int j = 8; j > 0; j--){
-                out.print(SET_BG_COLOR_RED);
-                if(whiteSquare){
-                    out.print(SET_BG_COLOR_BLUE);
-                }
-                Position checkPos = new Position(i,j);
-                if(tempGame.gameBoard.getPiece(checkPos) == null){
-                    out.print("   ");
-                }
-                else{
-                    out.print(SET_TEXT_COLOR_WHITE);
-                    if(tempGame.gameBoard.getPiece(checkPos).getTeamColor() == ChessGame.TeamColor.BLACK){
-                        out.print(SET_TEXT_COLOR_BLACK);
-                    }
-                    if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KING){
-                        out.print(BLACK_KING);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.QUEEN){
-                        out.print(BLACK_QUEEN);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.ROOK){
-                        out.print(BLACK_ROOK);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.BISHOP){
-                        out.print(BLACK_BISHOP);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.KNIGHT){
-                        out.print(BLACK_KNIGHT);
-                    }
-                    else if(tempGame.gameBoard.getPiece(checkPos).getPieceType() == ChessPiece.PieceType.PAWN){
-                        out.print(BLACK_PAWN);
-                    }
-                }
-                if(whiteSquare){
-                    whiteSquare = false;
-                }
-                else {
-                    whiteSquare = true;
-                }
-            }
-            out.print(SET_TEXT_COLOR_BLACK);
-            out.print(SET_BG_COLOR_LIGHT_GREY);
-            out.print( " " + i + " ");
-            out.print(RESET_BG_COLOR);
-            out.print("\n");
-        }
-//        out.print(ERASE_SCREEN);
-        out.print(SET_TEXT_COLOR_BLACK);
-        out.print(SET_BG_COLOR_LIGHT_GREY);
-        out.print(SET_TEXT_BOLD);
-        out.print("    H  G  F  E  D  C  B  A    ");
-        out.print(RESET_BG_COLOR);
-        out.print("\n");
-
-    }
-
-    public static void drawBoards(){
-        drawWhiteSide();
-        drawBlackSide();
-        System.out.print(RESET_TEXT_COLOR);
-        System.out.print("\n\n");
-        System.out.print(RESET_BG_COLOR);
-        System.out.print(SET_TEXT_COLOR_WHITE);
-
-    }
+//    public static void drawBoards(){
+//        drawWhiteSide();
+//        drawBlackSide();
+//        System.out.print(RESET_TEXT_COLOR);
+//        System.out.print("\n\n");
+//        System.out.print(RESET_BG_COLOR);
+//        System.out.print(SET_TEXT_COLOR_WHITE);
+//
+//    }
 
     public static void joinOption(String[] arguments) throws Exception{
         Map response = joinHelper(arguments,authToken);

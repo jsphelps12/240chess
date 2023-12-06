@@ -81,6 +81,7 @@ public class WSClient extends Endpoint {
         System.out.print(RESET_BG_COLOR);
         System.out.print(SET_TEXT_COLOR_WHITE);
         System.out.print(message);
+        System.out.print("\n");
     }
 
     public void loadHelper(Map messageMap){

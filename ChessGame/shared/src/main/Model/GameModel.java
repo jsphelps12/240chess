@@ -1,6 +1,7 @@
 package Model;
 
 import chess.ChessGame;
+import chess.Game;
 
 /**
  * Model.GameModel class
@@ -14,24 +15,24 @@ public class GameModel {
      * @param name game Name
      * @param g the actual game
      */
-    public GameModel(Integer i, String white, String black, String name, ChessGame g){
+    public GameModel(Integer i, String white, String black, String name, Game g){
         gameID = i;
         whiteUsername = white;
         blackUsername = black;
         gameName = name;
         this.game = g;
     }
-    public GameModel( String white, String black, String name, ChessGame g){
+    public GameModel( String white, String black, String name, Game g){
         whiteUsername = white;
         blackUsername = black;
         gameName = name;
         this.game = g;
     }
-    public GameModel(String name, ChessGame g){
+    public GameModel(String name, Game g){
         gameName = name;
         this.game = g;
     }
-    public GameModel(Integer i, String game, ChessGame g){
+    public GameModel(Integer i, String game, Game g){
         gameID = i;
         gameName = game;
         this.game = g;
@@ -60,7 +61,7 @@ public class GameModel {
     /**
      * the game object
      */
-    private ChessGame game;
+    private Game game;
 
     public void setBlackUsername(String blackUsername) {
         this.blackUsername = blackUsername;
@@ -110,7 +111,7 @@ public class GameModel {
      * gets the game
      * @return the game
      */
-    public ChessGame getGame(){
+    public Game getGame(){
         return game;
     }
     public String getGameString(){
