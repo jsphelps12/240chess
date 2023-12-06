@@ -10,9 +10,11 @@ public class Server {
     }
     private void run(){
 
-        Spark.port(8080);
+        Spark.port(6969);
 
         Spark.externalStaticFileLocation("web");
+
+        Spark.webSocket("/connect", WSServer.class);
 
         Spark.post("/session",new LoginHandler());
         Spark.post("/user",new RegisterHandler());
@@ -23,4 +25,7 @@ public class Server {
         Spark.get("/game", new ListHandler());
 
     }
+
+
+
 }

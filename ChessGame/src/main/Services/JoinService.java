@@ -38,10 +38,14 @@ public class JoinService {
             }
             GameModel gModel = gDAO.readGame(iD);
             if(color == ChessGame.TeamColor.WHITE && gModel.getWhiteUsername() != null){
-                return new JoinResponse("Error: already taken");
+                if(!gModel.getWhiteUsername().equals(user)) {
+                    return new JoinResponse("Error: already taken");
+                }
             }
             if(color == ChessGame.TeamColor.BLACK && gModel.getBlackUsername() != null){
-                return new JoinResponse("Error: already taken");
+                if(!gModel.getBlackUsername().equals(user)) {
+                    return new JoinResponse("Error: already taken");
+                }
             }
             if(color == ChessGame.TeamColor.WHITE){
                 gDAO.updateWhiteUserName(iD,user);

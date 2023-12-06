@@ -145,6 +145,23 @@ public class GameDAO {
         }
     }
 
+    public void board(Integer i, String newBoard) throws DataAccessException {
+//        GameModel g = readGame(i);
+//        g.setBlackUsername(user);
+        boolean commit = true;
+        var conn = db.getConnection();
+        try (var preparedStatement = conn.prepareStatement("UPDATE game SET board = ? WHERE id = ?")) {
+            preparedStatement.setString(1,newBoard);
+            preparedStatement.setInt(2,i);
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            commit = false;
+            throw new DataAccessException(ex.toString());
+        } finally {
+            db.closeConnection(commit);
+        }
+    }
+
     /**
      * Delete Game
      * @param i index of game we are deleting

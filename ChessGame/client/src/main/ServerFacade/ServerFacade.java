@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ServerFacade{
     public static Map registerHelper(String[] args) throws Exception{
-        URI uri = new URI("http://localhost:8080/user");
+        URI uri = new URI("http://localhost:6969/user");
         HttpURLConnection http = (HttpURLConnection) uri.toURL().openConnection();
         http.setRequestMethod("POST");
 
@@ -60,7 +60,7 @@ public class ServerFacade{
     }
 
     public static Map loginHelper(String[] args) throws Exception{
-        URI uri = new URI("http://localhost:8080/session");
+        URI uri = new URI("http://localhost:6969/session");
         HttpURLConnection http = (HttpURLConnection) uri.toURL().openConnection();
         http.setRequestMethod("POST");
 
@@ -105,7 +105,7 @@ public class ServerFacade{
     }
 
     public static Map logoutHelper(String[] args, String auth) throws Exception{
-        URI uri = new URI("http://localhost:8080/session");
+        URI uri = new URI("http://localhost:6969/session");
         HttpURLConnection http = (HttpURLConnection) uri.toURL().openConnection();
         http.setRequestMethod("DELETE");
 
@@ -138,7 +138,7 @@ public class ServerFacade{
     }
 
     public static Map createHelper(String[] args, String auth) throws Exception{
-        URI uri = new URI("http://localhost:8080/game");
+        URI uri = new URI("http://localhost:6969/game");
         HttpURLConnection http = (HttpURLConnection) uri.toURL().openConnection();
         http.setRequestMethod("POST");
 
@@ -185,7 +185,7 @@ public class ServerFacade{
     }
 
     public static ListResponse listHelper(String[] args, String auth) throws Exception{
-        URI uri = new URI("http://localhost:8080/game");
+        URI uri = new URI("http://localhost:6969/game");
         HttpURLConnection http = (HttpURLConnection) uri.toURL().openConnection();
         http.setRequestMethod("GET");
 
@@ -219,7 +219,7 @@ public class ServerFacade{
     }
 
     public static Map observeHelper(String[] args, String auth) throws Exception{
-        URI uri = new URI("http://localhost:8080/game");
+        URI uri = new URI("http://localhost:6969/game");
         HttpURLConnection http = (HttpURLConnection) uri.toURL().openConnection();
         http.setRequestMethod("PUT");
 
@@ -273,7 +273,7 @@ public class ServerFacade{
         }
     }
     public static Map joinHelper(String[] args, String auth) throws Exception{
-        URI uri = new URI("http://localhost:8080/game");
+        URI uri = new URI("http://localhost:6969/game");
         HttpURLConnection http = (HttpURLConnection) uri.toURL().openConnection();
         http.setRequestMethod("PUT");
 
@@ -283,12 +283,18 @@ public class ServerFacade{
         // Write out a header
         http.addRequestProperty("Content-Type", "application/json");
         http.addRequestProperty("authorization",auth);
-
-        if(args.length != 3 && args.length !=2){
+        String command = args[0].toLowerCase();
+        if(args.length != 3 && command.equals("join")){
             Map respBody = new HashMap();
             respBody.put("message","Error: Wrong number of Arguments");
             return respBody;
         }
+        if(args.length != 2 && command.equals("observe")){
+            Map respBody = new HashMap();
+            respBody.put("message","Error: Wrong number of Arguments");
+            return respBody;
+        }
+
         String color = null;
         if(args.length == 3) {
             color = args[2].toUpperCase();

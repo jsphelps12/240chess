@@ -1,7 +1,7 @@
 package ui;
 
 import Requests.RegisterRequest;
-import ServerFacade.ServerFacade;
+import ServerFacade.*;
 import chess.ChessGame;
 import chess.ChessPiece;
 import chess.Game;

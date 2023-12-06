@@ -28,7 +28,7 @@ class ServerFacadeTest {
     @Test
     @Order(1)
     public void clearAll() throws Exception{
-        URI uri = new URI("http://localhost:8080/db");
+        URI uri = new URI("http://localhost:6969/db");
         HttpURLConnection http = (HttpURLConnection) uri.toURL().openConnection();
         http.setRequestMethod("DELETE");
         // Specify that we are going to write out data
@@ -117,7 +117,7 @@ class ServerFacadeTest {
     @Test
     @Order(14)
     public void observeHelperTest() throws Exception{
-        String[] args = {"join","1"};
+        String[] args = {"observe","1"};
         Map response = joinHelper(args, auth);
         boolean success = false;
         if(!response.containsKey("message")){
@@ -130,7 +130,7 @@ class ServerFacadeTest {
     @Order(15)
     public void joinHelperTest() throws Exception{
         String[] args = {"join","1","white"};
-        Map response = joinHelper(args, auth);
+        Map response =  joinHelper(args, auth);
         boolean success = false;
         if(!response.containsKey("message")){
             success = true;
