@@ -48,7 +48,31 @@ public class InGameUI {
             else if(command.equals("resign")){
                 resignOption();
             }
+            else if(command.equals("highlight")){
+                highlightOption(arguments);
+            }
         }
+    }
+
+    public void highlightOption(String[] arguments){
+        String start = arguments[1];
+        char startCol = start.charAt(0);
+        startCol = Character.toLowerCase(startCol);
+        int startColInt;
+        HashMap<Character,Integer> charToInt = new HashMap<>();
+        charToInt.put('a',1);
+        charToInt.put('b',2);
+        charToInt.put('c',3);
+        charToInt.put('d',4);
+        charToInt.put('e',5);
+        charToInt.put('f',6);
+        charToInt.put('g',7);
+        charToInt.put('h',8);
+        startColInt = charToInt.get(startCol);
+        char startRow = start.charAt(1);
+        int startRowInt = Character.getNumericValue(startRow);
+        Position startPosition = new Position(startRowInt,startColInt);
+        wsClient.highlightMoves(startPosition);
     }
 
     public void resignOption() throws Exception {
