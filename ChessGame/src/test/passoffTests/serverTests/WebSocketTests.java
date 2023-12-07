@@ -17,7 +17,6 @@ import java.util.concurrent.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class WebSocketTests {
-
     private static TestClient bobClient;
     private static TestClient jamesClient;
     private static TestClient alfredClient;
