@@ -107,7 +107,7 @@ public class InGameUI {
             }
         }
         Move move = new Move(startPosition,endPosition,promotion);
-        MAKE_MOVECOMMAND makeMovecommand = new MAKE_MOVECOMMAND(authToken,gameID,move, arguments[1], arguments[2],toPromote);
+        MAKE_MOVECOMMAND makeMovecommand = new MAKE_MOVECOMMAND(authToken,gameID,move);
         String toSend = gson.toJson(makeMovecommand);
         wsClient.send(toSend);
 

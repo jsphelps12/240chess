@@ -6,6 +6,7 @@ import Model.Auth;
 import Model.GameModel;
 import chess.*;
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import dataAccess.DataAccessException;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.*;
@@ -84,25 +85,39 @@ public class WSServer {
     }
 
     public void resignHelper(Session session,Map messageMap) throws DataAccessException, IOException {
+        String authToken = messageMap.get("authToken").toString();
+        AuthDAO authDAO = new AuthDAO();
+        Auth auth = authDAO.readAuth(authToken);
+        String user = auth.getUsername();
         Double id = (Double) messageMap.get("gameID");
         double idDouble = id.doubleValue();
         int gameID = (int) Math.round(idDouble);
         GameDAO gDAO = new GameDAO();
         GameModel gameModel = gDAO.readGame(gameID);
+        if(!gameModel.getWhiteUsername().equals(user) && !gameModel.getBlackUsername().equals(user)){
+            ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR,"Error: You're not a player");
+            String toSend = gson.toJson(errorMessage);
+            session.getRemote().sendString(toSend);
+            return;
+        }
+        if(gameModel.getGame().getGameOver()){
+            ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR,"Error: Game already over");
+            String toSend = gson.toJson(errorMessage);
+            session.getRemote().sendString(toSend);
+            return;
+        }
         gameModel.getGame().resign();
-        String authToken = messageMap.get("authToken").toString();
-        AuthDAO authDAO = new AuthDAO();
-        Auth auth = authDAO.readAuth(authToken);
-        String user = auth.getUsername();
+        String updatedGame = gameModel.getGame().toString();
+        gDAO.updateBoard(gameID,updatedGame);
+
         String notification = user + " has resigned";
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION,notification);
         String messageNoti = gson.toJson(notificationMessage);
         Map<String,Session> thisGameSessions = sessions.get(gameID);
         for(String key: thisGameSessions.keySet()){
-            if(!key.equals(user)){
-                Session seshToSend = thisGameSessions.get(key);
-                seshToSend.getRemote().sendString(messageNoti);
-            }
+            Session seshToSend = thisGameSessions.get(key);
+            seshToSend.getRemote().sendString(messageNoti);
+
         }
         //this.session.getRemote().sendString(messageNoti);
 
@@ -132,19 +147,53 @@ public class WSServer {
     }
 
     public void moveHelper(Session session,Map messageMap) throws DataAccessException, InvalidMoveException, IOException {
-//        Move move = moveCommand.getMove();
-        String start = messageMap.get("start").toString();
-        String end = messageMap.get("end").toString();
-        String toPromote = null;
-        if(messageMap.containsKey("promo")){
-            toPromote = messageMap.get("promo").toString();
+//      Move move = moveCommand.getMove();
+        String authToken = messageMap.get("authToken").toString();
+        AuthDAO authDAO = new AuthDAO();
+        Auth auth = authDAO.readAuth(authToken);
+        String user = auth.getUsername();
+        String move1 = gson.toJson(messageMap.get("move"));
+        Map moveMap = gson.fromJson(move1,Map.class);
+        String start = gson.toJson(moveMap.get("start"));
+        Map startVals = gson.fromJson(start,Map.class);
+        Double startRowDouble = (Double) startVals.get("row");
+        double srDouble = startRowDouble.doubleValue();
+        int startRow = (int) Math.round(srDouble);
+        Double startColDouble = (Double) startVals.get("column");
+        double scDouble = startColDouble.doubleValue();
+        int startCol = (int) Math.round(scDouble);
+        Position startPos = new Position(startRow,startCol);
+        String end = gson.toJson(moveMap.get("end"));
+        Map endVals = gson.fromJson(end,Map.class);
+        Double endRowDouble = (Double) endVals.get("row");
+        double erDouble = endRowDouble.doubleValue();
+        int endRow = (int) Math.round(erDouble);
+        Double endColDouble = (Double) endVals.get("column");
+        double ecDouble = endColDouble.doubleValue();
+        int endCol = (int) Math.round(ecDouble);
+        Position endPos = new Position(endRow,endCol);
+        String promo = null;
+        ChessPiece.PieceType pieceType = null;
+        if(moveMap.containsKey("promotionType")){
+            promo = moveMap.get("promotionType").toString();
+            if(promo.equals("QUEEN")){
+                pieceType = ChessPiece.PieceType.QUEEN;
+            }
+            else if(promo.equals("KNIGHT")){
+                pieceType = ChessPiece.PieceType.KNIGHT;
+            }
+            else if(promo.equals("BISHOP")){
+                pieceType = ChessPiece.PieceType.BISHOP;
+            }
+            else if(promo.equals("ROOK")){
+                pieceType = ChessPiece.PieceType.ROOK;
+            }
         }
         Double id = (Double) messageMap.get("gameID");
         double idDouble = id.doubleValue();
         int gameID = (int) Math.round(idDouble);
-        Move move = stringToMove(start, end, toPromote);
+        Move move = new Move(startPos, endPos, pieceType);
 
-        String authToken = messageMap.get("authToken").toString();
         GameDAO gDAO = new GameDAO();
         GameModel gameModel = gDAO.readGame(gameID);
         Game game = gameModel.getGame();
@@ -155,19 +204,46 @@ public class WSServer {
         if(!game.getGameOver()) {
             for (ChessMove posMove : validMoves) {
                 if (posMove.equals(move)) {
-                    valid = true;
+                    if(!game.getGameOver()) {
+                        valid = true;
+                    }
                 }
             }
         }
+        if(!gameModel.getWhiteUsername().equals(user) && game.getColor() == ChessGame.TeamColor.WHITE){
+            ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR,"Error: Not Valid");
+            String toSend = gson.toJson(errorMessage);
+            session.getRemote().sendString(toSend);
+            return;
+        }
+        if(!gameModel.getBlackUsername().equals(user) && game.getColor() == ChessGame.TeamColor.BLACK){
+            ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR,"Error: Not Valid");
+            String toSend = gson.toJson(errorMessage);
+            session.getRemote().sendString(toSend);
+            return;
+        }
+
+
         if (valid){
-            game.makeMove(move);
+            try {
+                game.makeMove(move);
+            }catch(Exception e){
+                ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR,"Error: Not Valid");
+                String toSend = gson.toJson(errorMessage);
+                session.getRemote().sendString(toSend);
+                return;
+            }
+        }
+        else{
+            ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR,"Error: Invalid Move");
+            String toSend = gson.toJson(errorMessage);
+            session.getRemote().sendString(toSend);
+            return;
         }
         String updatedGame = game.toString();
         gDAO.updateBoard(gameID,updatedGame);
         gameModel = gDAO.readGame(gameID);
-        AuthDAO authDAO = new AuthDAO();
-        Auth auth = authDAO.readAuth(authToken);
-        String user = auth.getUsername();
+
         String gameToSend = gameModel.getGame().toString();
         LoadGameCommand loadGameCommand = new LoadGameCommand(ServerMessage.ServerMessageType.LOAD_GAME,gameToSend);
         String message = gson.toJson(loadGameCommand);
@@ -403,50 +479,6 @@ public class WSServer {
         }
         //this.session.getRemote().sendString(messageNoti);
     }
-
-    public Move stringToMove(String start, String end, String piece){
-        char startCol = start.charAt(0);
-        startCol = Character.toLowerCase(startCol);
-        int startColInt;
-        HashMap<Character,Integer> charToInt = new HashMap<>();
-        charToInt.put('a',1);
-        charToInt.put('b',2);
-        charToInt.put('c',3);
-        charToInt.put('d',4);
-        charToInt.put('e',5);
-        charToInt.put('f',6);
-        charToInt.put('g',7);
-        charToInt.put('h',8);
-        startColInt = charToInt.get(startCol);
-        char startRow = start.charAt(1);
-        int startRowInt = Character.getNumericValue(startRow);
-        Position startPosition = new Position(startRowInt,startColInt);
-        char endCol = end.charAt(0);
-        endCol = Character.toLowerCase(endCol);
-        int endColInt = charToInt.get(endCol);
-        char endRow = end.charAt(1);
-        int endRowInt = Character.getNumericValue(endRow);
-        Position endPosition = new Position(endRowInt,endColInt);
-        ChessPiece.PieceType promotion = null;
-        if(piece != null){
-            String promString = piece.toUpperCase();
-            if(promString.equals("Q")){
-                promotion = ChessPiece.PieceType.QUEEN;
-            }
-            else if(promString.equals("B")){
-                promotion = ChessPiece.PieceType.BISHOP;
-            }
-            else if(promString.equals("R")){
-                promotion = ChessPiece.PieceType.ROOK;
-            }
-            else if(promString.equals("N")){
-                promotion = ChessPiece.PieceType.KNIGHT;
-            }
-        }
-        return new Move(startPosition,endPosition,promotion);
-    }
-
-
 
 
 }

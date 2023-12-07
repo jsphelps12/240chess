@@ -400,5 +400,7 @@ public class Game implements ChessGame{
     public Boolean getGameOver(){
         return gameOver;
     }
+
+    public TeamColor getColor(){return color;}
 }
 
