@@ -66,6 +66,16 @@ public class WSServer {
     @OnWebSocketClose
     public void onClose(Session session, int statusCode, String reason) {
         System.out.println("Closed: " + statusCode + " - " + reason);
+//        for( int game : sessions.keySet()){
+//            for(String user: sessions.get(game).keySet()){
+//                if(sessions.get(game).get(user) == session){
+//                    sessions.get(game).remove(user);
+//                }
+//            }
+//        }
+        for(Map<String,Session> gameSession : sessions.values()){
+            gameSession.values().remove(session);
+        }
     }
 
     @OnWebSocketError
@@ -216,6 +226,9 @@ public class WSServer {
         Double id = (Double) messageMap.get("gameID");
         double idDouble = id.doubleValue();
         int gameID = (int) Math.round(idDouble);
+        if(!sessions.containsKey(gameID)){
+            sessions.put(gameID,new HashMap<>());
+        }
         Map<String,Session> thisGameSessions = sessions.get(gameID);
         GameDAO gDAO = new GameDAO();
         GameModel gameModel = gDAO.readGame(gameID);
@@ -223,13 +236,8 @@ public class WSServer {
             String errorMessage = "Error: Bad Game";
             ErrorMessage errorMessage1 = new ErrorMessage(ServerMessage.ServerMessageType.ERROR,errorMessage);
             String toSend = gson.toJson(errorMessage1);
-            for(String key: thisGameSessions.keySet()){
-                if(key.equals(user)){
-                    Session seshToSend = thisGameSessions.get(key);
-                    seshToSend.getRemote().sendString(toSend);
-                    return;
-                }
-            }
+            session.getRemote().sendString(toSend);
+            return;
         }
         String game = gameModel.getGame().toString();
         sessions.get(gameID).put(user,session);
