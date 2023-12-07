@@ -26,7 +26,7 @@ public class WSClient extends Endpoint {
 
     public String latestGame;
 
-    public String userColor;
+    public String userColor = "WHITE";
 
 
 
@@ -100,13 +100,15 @@ public class WSClient extends Endpoint {
     public void loadHelper(Map messageMap){
         String color = messageMap.get("teamColor").toString();
         color = color.toUpperCase();
-        userColor = color;
         String game = messageMap.get("game").toString();
         latestGame = game;
-        if(color.equals("BLACK")){
+        if(userColor.equals("BLACK")){
             drawBlackSide(game);
         }
-        else{
+        else if(userColor.equals("WHITE")){
+            drawWhiteSide(game);
+        }
+        else if(userColor == null){
             drawWhiteSide(game);
         }
     }
@@ -307,9 +309,11 @@ public class WSClient extends Endpoint {
                     out.print(SET_BG_COLOR_MAGENTA);
                 }
                 else{
-                    for(ChessMove move : validMoves){
-                        if(move.getEndPosition().getRow() == i && move.getEndPosition().getColumn() ==j){
-                            out.print(SET_BG_COLOR_GREEN);
+                    if (validMoves != null) {
+                        for (ChessMove move : validMoves) {
+                            if (move.getEndPosition().getRow() == i && move.getEndPosition().getColumn() == j) {
+                                out.print(SET_BG_COLOR_GREEN);
+                            }
                         }
                     }
                 }
@@ -392,9 +396,11 @@ public class WSClient extends Endpoint {
                     out.print(SET_BG_COLOR_MAGENTA);
                 }
                 else{
-                    for(ChessMove move : validMoves){
-                        if(move.getEndPosition().getRow() == i && move.getEndPosition().getColumn() ==j){
-                            out.print(SET_BG_COLOR_GREEN);
+                    if(validMoves != null) {
+                        for (ChessMove move : validMoves) {
+                            if (move.getEndPosition().getRow() == i && move.getEndPosition().getColumn() == j) {
+                                out.print(SET_BG_COLOR_GREEN);
+                            }
                         }
                     }
                 }
@@ -446,6 +452,10 @@ public class WSClient extends Endpoint {
         out.print("    A  B  C  D  E  F  G  H    ");
         out.print(RESET_BG_COLOR);
         out.print("\n");
+    }
+
+    public void setUserColor(String color){
+        this.userColor = color;
     }
 
 

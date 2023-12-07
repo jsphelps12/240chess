@@ -253,6 +253,7 @@ public class WSServer {
             seshToSend.getRemote().sendString(message);
 
         }
+
         //this.session.getRemote().sendString(message);
 
         String notification = user + " has made a move" ;
@@ -260,6 +261,24 @@ public class WSServer {
         String messageNoti = gson.toJson(notificationMessage);
         for(String key: thisGameSessions.keySet()){
             if(!key.equals(user)){
+                Session seshToSend = thisGameSessions.get(key);
+                seshToSend.getRemote().sendString(messageNoti);
+            }
+        }
+        if(game.isInCheckmate(ChessGame.TeamColor.WHITE) || game.isInCheck(ChessGame.TeamColor.BLACK)){
+            notification = "Check!" ;
+            notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION,notification);
+            messageNoti = gson.toJson(notificationMessage);
+            for(String key: thisGameSessions.keySet()){
+                Session seshToSend = thisGameSessions.get(key);
+                seshToSend.getRemote().sendString(messageNoti);
+            }
+        }
+        if(game.getGameOver()){
+            notification = "Game Over." ;
+            notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION,notification);
+            messageNoti = gson.toJson(notificationMessage);
+            for(String key: thisGameSessions.keySet()){
                 Session seshToSend = thisGameSessions.get(key);
                 seshToSend.getRemote().sendString(messageNoti);
             }

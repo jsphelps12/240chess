@@ -234,6 +234,7 @@ public class PostLogin {
         int id = Integer.parseInt(arguments[1]);
         String color = arguments[2].toUpperCase();
         ChessGame.TeamColor teamColor;
+        wsClient.setUserColor(color);
         if (color.equals("WHITE")){
             teamColor = ChessGame.TeamColor.WHITE;
         }
@@ -244,7 +245,7 @@ public class PostLogin {
         String toSendWS = gson.toJson(joinPlayerCommand);
         wsClient.send(toSendWS);
         InGameUI inGameUI = new InGameUI();
-        inGameUI.main(authToken,id,wsClient);
+        inGameUI.main(authToken,id,wsClient, color);
 
         //drawBoards();
     }
@@ -261,7 +262,7 @@ public class PostLogin {
         String toSendWS = gson.toJson(joinObserverCommand);
         wsClient.send(toSendWS);
         InGameUI inGameUI = new InGameUI();
-        inGameUI.main(authToken,id,wsClient);
+        inGameUI.main(authToken,id,wsClient,null);
         //drawBoards();
     }
 

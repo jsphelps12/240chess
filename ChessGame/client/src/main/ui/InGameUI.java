@@ -21,7 +21,7 @@ public class InGameUI {
 
     WSClient wsClient;
 
-    public  void main(String auth, int gameID, WSClient wsClient) throws Exception {
+    public  void main(String auth, int gameID, WSClient wsClient, String color) throws Exception {
         this.wsClient = wsClient;
         authToken = auth;
         this.gameID = gameID;
