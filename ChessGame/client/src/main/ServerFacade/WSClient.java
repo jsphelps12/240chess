@@ -60,6 +60,9 @@ public class WSClient extends Endpoint {
                     else if(messageMap.get("serverMessageType").equals("NOTIFICATION")) {
                         notificationHelper(messageMap);
                     }
+                    else if(messageMap.get("serverMessageType").equals("ERROR")){
+                        errorHelper(messageMap);
+                    }
                 }
             });
         } catch (DeploymentException | IOException | URISyntaxException ex) {
@@ -74,6 +77,14 @@ public class WSClient extends Endpoint {
     //Endpoint requires this method, but you don't have to do anything
     @Override
     public void onOpen(Session session, EndpointConfig endpointConfig) {
+    }
+
+    public void errorHelper(Map messageMap){
+        String message = messageMap.get("errorMessage").toString();
+        System.out.print(RESET_BG_COLOR);
+        System.out.print(SET_TEXT_COLOR_WHITE);
+        System.out.print(message);
+        System.out.print("\n");
     }
 
     public void notificationHelper(Map messageMap){
